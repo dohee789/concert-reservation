@@ -1,0 +1,58 @@
+erDiagram
+    User ||--|{ QueueToken : "HAS_MANY"
+    User ||--|| Account : "HAS_ONE"
+    User ||--o{ Reservation : "MAKES"
+    Reservation ||--|{ Payment : "HAS_ONE"
+    Reservation ||--|| Concert : "FOR"
+    Reservation ||--|| Seat : "RESERVES"
+    Concert ||--|{ Seat : "HAS_MANY"
+
+    User {
+        UUID id
+        string name
+        string email
+        UserStatus status
+    }
+
+    QueueToken {
+        UUID tokenId
+        LocalDateTime createdAt
+        LocalDateTime expiredAt
+        int queuePosition
+        QueueTokenStatus status
+    }
+
+    Account {
+        int accountId
+        BigDecimal balance
+        LocalDateTime lastUpdated
+    }
+
+    Concert {
+        int concertId
+        string name
+        string description
+        LocalDate date
+        LocalTime time
+        ConcertStatus status
+    }
+
+    Seat {
+        int seatId
+        int seatNumber
+        BigDecimal price
+        SeatStatus status
+    }
+
+    Reservation {
+        UUID reservationId
+        LocalDateTime reservedAt
+        ReservationStatus status
+    }
+
+    Payment {
+        UUID paymentId
+        BigDecimal amount
+        LocalDateTime paidAt
+        PaymentStatus status
+    }

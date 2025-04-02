@@ -1,0 +1,82 @@
+classDiagram
+    class User {
+        -UUID id
+        -String name
+        -String email
+        -UserStatus status
+        +register()
+        +updateStatus()
+    }
+
+    class QueueToken {
+        -UUID tokenId
+        -User user
+        -LocalDateTime createdAt
+        -LocalDateTime expiredAt
+        -int queuePosition
+        -QueueTokenStatus status
+        +isValid() bool
+        +isexpired()
+        +refreshExpiration()
+    }
+
+    class Account {
+        -int accountId
+        -User user
+        -BigDecimal balance
+        -LocalDateTime lastUpdated
+        +charge(amount) bool
+        +getBalance() BigDecimal
+    }
+
+    class Concert {
+        -int concertId
+        -String name
+        -String description
+        -LocalDate date
+        -LocalTime time
+        -ConcertStatus status
+        +updateStatus()
+    }
+
+    class Seat {
+        -int seatId
+        -Concert concert
+        -int seatNumber
+        -BigDecimal price
+        -SeatStatus status
+        +reserve() bool
+        +confirmReservation()
+    }
+
+    class Reservation {
+        -UUID reservationId
+        -User user
+        -Concert concert
+        -Seat seat
+        -LocalDateTime reservedAt
+        -ReservationStatus status
+        +confirm()
+        +cancel()
+    }
+
+    class Payment {
+        -UUID paymentId
+        -Reservation reservationId
+        -User user
+        -BigDecimal amount
+        -LocalDateTime paidAt
+        -PaymentStatus status
+        +complete()
+        +fail()
+        +cancel()
+    }
+
+
+    User "1" -- "1" Account
+    User "1" -- "*" QueueToken
+    User "1" -- "*" Reservation
+    Reservation "*" -- "1" Seat
+    Reservation "*" -- "1" Concert
+    Reservation "1" -- "1" Payment
+    Concert "1" -- "*" Seat
