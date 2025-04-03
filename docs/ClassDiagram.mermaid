@@ -1,82 +1,112 @@
 classDiagram
     class User {
-        -UUID id
-        -String name
-        -String email
-        -UserStatus status
-        +register()
-        +updateStatus()
+        -int id
+        -string name
+        -string email
+        -string password
+        -float balance
+        -datetime createdAt
+        -datetime updatedAt
+        +makeReservation(Seat seat) Reservation
+        +processTransaction(float amount, TransactionType type) Transaction
+        +getBalance() float
+        +updateBalance(float amount) void
     }
 
-    class QueueToken {
-        -UUID tokenId
-        -User user
-        -LocalDateTime createdAt
-        -LocalDateTime expiredAt
-        -int queuePosition
-        -QueueTokenStatus status
-        +isValid() bool
-        +isexpired()
-        +refreshExpiration()
-    }
-
-    class Account {
-        -int accountId
-        -User user
-        -BigDecimal balance
-        -LocalDateTime lastUpdated
-        +charge(amount) bool
-        +getBalance() BigDecimal
+    class Token {
+        -int id
+        -int userId
+        -string token
+        -datetime expiredAt
+        -boolean isValid
+        -datetime createdAt
+        +isExpired() boolean
+        +validateToken() boolean
     }
 
     class Concert {
-        -int concertId
-        -String name
-        -String description
-        -LocalDate date
-        -LocalTime time
+        -int id
+        -string name
+        -string description
         -ConcertStatus status
-        +updateStatus()
+        +getSchedules() List~Schedule~
+        +open() void
+        +close() void
+    }
+
+    class Schedule {
+        -int id
+        -int concertId
+        -date scheduleDate
+        -time startTime
+        +getSeats() List~Seat~
+        +getAvailableSeats() List~Seat~
     }
 
     class Seat {
-        -int seatId
-        -Concert concert
-        -int seatNumber
-        -BigDecimal price
+        -int id
+        -int scheduleId
+        -string seatNumber
+        -float price
         -SeatStatus status
-        +reserve() bool
-        +confirmReservation()
+        +reserve() boolean
+        +release() void
+        +isAvailable() boolean
     }
 
     class Reservation {
-        -UUID reservationId
-        -User user
-        -Concert concert
-        -Seat seat
-        -LocalDateTime reservedAt
+        -int id
+        -int userId
+        -int seatId
+        -int transactionId
         -ReservationStatus status
-        +confirm()
-        +cancel()
+        -datetime reservedAt
+        -datetime expiredAt
+        +complete() void
+        +cancel() void
+        +isExpired() boolean
     }
 
-    class Payment {
-        -UUID paymentId
-        -Reservation reservationId
-        -User user
-        -BigDecimal amount
-        -LocalDateTime paidAt
-        -PaymentStatus status
-        +complete()
-        +fail()
-        +cancel()
+    class Transaction {
+        -int id
+        -int userId
+        -TransactionType type
+        -float amount
+        -TransactionStatus status
+        -datetime processedAt
+        +process() boolean
+        +getStatus() TransactionStatus
     }
 
+    class SeatStatus {
+        <<enumeration>>
+        AVAILABLE
+        RESERVED
+    }
 
-    User "1" -- "1" Account
-    User "1" -- "*" QueueToken
-    User "1" -- "*" Reservation
-    Reservation "*" -- "1" Seat
-    Reservation "*" -- "1" Concert
-    Reservation "1" -- "1" Payment
-    Concert "1" -- "*" Seat
+    class ReservationStatus {
+        <<enumeration>>
+        SUCCESS
+        FAILED
+    }
+
+    class TransactionType {
+        <<enumeration>>
+        PAYMENT
+        CHARGE
+    }
+
+    class TransactionStatus {
+        <<enumeration>>
+        SUCCESS
+        FAILED
+        PENDING
+    }
+
+    User "1" -- "0..*" Reservation : makes
+    User "1" -- "0..*" Transaction : has
+    User "1" -- "0..1" Token : has
+    Concert "1" -- "0..*" Schedule : has
+    Schedule "1" -- "0..*" Seat : contains
+    Seat "1" -- "0..*" Reservation : reserved in
+    Reservation "1" -- "1" Transaction : paid by

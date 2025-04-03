@@ -1,58 +1,66 @@
 erDiagram
-    User ||--|{ QueueToken : "HAS_MANY"
-    User ||--|| Account : "HAS_ONE"
-    User ||--o{ Reservation : "MAKES"
-    Reservation ||--|{ Payment : "HAS_ONE"
-    Reservation ||--|| Concert : "FOR"
-    Reservation ||--|| Seat : "RESERVES"
-    Concert ||--|{ Seat : "HAS_MANY"
-
+    User ||--o{ Reservation : makes
+    User ||--o{ Transaction : has
     User {
-        UUID id
+        int id PK
         string name
         string email
-        UserStatus status
+        string password
+        float balance
+        datetime createdAt
+        datetime updatedAt
     }
 
-    QueueToken {
-        UUID tokenId
-        LocalDateTime createdAt
-        LocalDateTime expiredAt
-        int queuePosition
-        QueueTokenStatus status
+    Token ||--|| User : belongs_to
+    Token {
+        int id PK
+        int userId FK
+        string token
+        datetime expiredAt
+        boolean isValid
+        datetime createdAt
     }
 
-    Account {
-        int accountId
-        BigDecimal balance
-        LocalDateTime lastUpdated
-    }
-
+    Concert ||--o{ Schedule : has
     Concert {
-        int concertId
+        int id PK
         string name
         string description
-        LocalDate date
-        LocalTime time
-        ConcertStatus status
     }
 
+    Schedule ||--o{ Seat : contains
+    Schedule {
+        int id PK
+        int concertId FK
+        date scheduleDate
+        time startTime
+    }
+
+    Seat ||--o{ Reservation : has
     Seat {
-        int seatId
-        int seatNumber
-        BigDecimal price
-        SeatStatus status
+        int id PK
+        int scheduleId FK
+        string seatNumber
+        float price
+        enum status "AVAILABLE | RESERVED"
     }
 
+    Reservation ||--|| Transaction : has_payment
     Reservation {
-        UUID reservationId
-        LocalDateTime reservedAt
-        ReservationStatus status
+        int id PK
+        int userId FK
+        int seatId FK
+        int transactionId FK
+        enum status "SUCCESS | FAILED"
+        datetime reservedAt
+        datetime expiredAt
     }
 
-    Payment {
-        UUID paymentId
-        BigDecimal amount
-        LocalDateTime paidAt
-        PaymentStatus status
+    Transaction {
+        int id PK
+        int userId FK
+        enum type "PAYMENT | CHARGE"
+        float amount
+        enum status "SUCCESS | FAILED | PENDING"
+        datetime processedAt
     }

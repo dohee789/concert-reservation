@@ -1,0 +1,21 @@
+sequenceDiagram
+    participant Controller as QueueController
+    participant Service as QueueService
+    participant Repository as QueueRepository
+
+    Controller->>+Service: validateToken()
+    alt findToken() !== true
+        Service->>+Service: generateToken()
+        Service->>+Repository: saveToken()
+        loop every 5 minutes
+            Service->>+Service: Enter Active Queue
+            Service->>+Repository: findToken()
+            alt findToken() === true
+                Service->>+Service: Enter Waiting Queue
+            end
+        end
+    else
+        Service->>+Repository: findToken()
+    end
+    Repository-->>-Service:  return token
+    Service-->>-Controller: return token
