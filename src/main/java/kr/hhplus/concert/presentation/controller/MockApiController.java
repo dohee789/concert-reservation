@@ -115,6 +115,7 @@ public class MockApiController {
                     )
             )
     )
+    @PostMapping("/reservation")
     public ResponseEntity<ReservationDTO.Response> reserveSeat(
             @RequestHeader("TOKEN") String token,
             @RequestBody ReservationDTO.Request request
@@ -135,24 +136,22 @@ public class MockApiController {
         );
     }
 
-    private final Map<Object, Float> userBalances = new HashMap<>();
-
     @Tag(name = "Transaction", description = "잔액 조회 및 충전 API")
     @Operation(summary = "잔액 조회", description = "유저 ID를 기반으로 현재 잔액을 조회합니다")
     @ApiResponse(responseCode = "200", description = "성공",
             content = @Content(
                     mediaType = "application/json",
                     examples = @ExampleObject(
-                            value = "{ \"userId\": \"1\", \"balance\": \"200.0\" }"
+                            value = "{ \"userId\": \"1\", \"balance\": \"200.000\" }"
                     )
             )
     )
     @GetMapping("/transaction/balance")
     public ResponseEntity<TransactionDTO.BalanceResponse> getBalance(@RequestParam long userId) {
-        float balance = userBalances.getOrDefault(userId, 0F);
+        float currentBalance = 1000F;
         return ResponseEntity.ok(TransactionDTO.BalanceResponse.builder()
                 .userId(userId)
-                .balance(balance)
+                .balance(currentBalance)
                 .build());
     }
 
@@ -171,9 +170,8 @@ public class MockApiController {
             @RequestParam long userId,
             @RequestParam float amount
     ) {
-        float currentBalance = userBalances.getOrDefault(userId, 0F);
+        float currentBalance = 1000F;
         float newBalance = currentBalance + amount;
-        userBalances.put(userId, newBalance);
 
         return ResponseEntity.ok(TransactionDTO.BalanceResponse.builder()
                 .userId(userId)
