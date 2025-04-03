@@ -1,21 +1,21 @@
 classDiagram
     class Queue {
         -int id
-        -int userId
+        -long userId
         -string token
         -datetime expiredAt
-        -datetime createdAt
+        -datetime enteredAt
         +valiadateToken() boolean
     }
 
     class Concert {
-        -int id
+        -long id
         -string name
         -string description
     }
 
     class Schedule {
-        -int id
+        -long id
         -int concertId
         -date scheduleDate
         -time startTime
@@ -23,8 +23,9 @@ classDiagram
 
     class Seat {
         -int id
+        -int concertId
         -int scheduleId
-        -string seatNumber
+        -int seatNumber
         -float price
         -SeatStatus status
     }

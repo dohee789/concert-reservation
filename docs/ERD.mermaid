@@ -4,16 +4,16 @@ erDiagram
 
     Queue {
         int id PK
-        int userId FK
+        long userId FK
         string token
         datetime expiredAt
         enum type "ACTIVE | WAITING"
-        datetime createdAt
+        datetime enteredAt
     }
 
     Concert ||--o{ Schedule : has
     Concert {
-        int id PK
+        long id PK
         string name
         string description
     }
@@ -21,7 +21,7 @@ erDiagram
     Schedule ||--o{ Seat : has
     Schedule {
         int id PK
-        int concertId FK
+        long concertId FK
         date scheduleDate
         time startTime
     }
@@ -29,7 +29,9 @@ erDiagram
     Seat ||--o{ Reservation : has
     Seat {
         int id PK
+        int concertId FK
         int scheduleId FK
+        int seatNumber
         float price
         enum status "AVAILABLE | RESERVED"
     }
