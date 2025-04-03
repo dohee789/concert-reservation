@@ -1,23 +1,13 @@
 erDiagram
-    User ||--o{ Reservation : makes
-    User ||--o{ Transaction : has
-    User {
-        int id PK
-        string name
-        string email
-        string password
-        float balance
-        datetime createdAt
-        datetime updatedAt
-    }
+    Queue ||--o{ Reservation : has
+    Queue ||--o{ Transaction : has
 
-    Token ||--|| User : belongs_to
-    Token {
+    Queue {
         int id PK
         int userId FK
         string token
         datetime expiredAt
-        boolean isValid
+        enum type "ACTIVE | WAITING"
         datetime createdAt
     }
 
@@ -28,7 +18,7 @@ erDiagram
         string description
     }
 
-    Schedule ||--o{ Seat : contains
+    Schedule ||--o{ Seat : has
     Schedule {
         int id PK
         int concertId FK
@@ -40,12 +30,11 @@ erDiagram
     Seat {
         int id PK
         int scheduleId FK
-        string seatNumber
         float price
         enum status "AVAILABLE | RESERVED"
     }
 
-    Reservation ||--|| Transaction : has_payment
+    Reservation ||--o{ Transaction : has
     Reservation {
         int id PK
         int userId FK
@@ -61,6 +50,7 @@ erDiagram
         int userId FK
         enum type "PAYMENT | CHARGE"
         float amount
+        float balance
         enum status "SUCCESS | FAILED | PENDING"
         datetime processedAt
     }

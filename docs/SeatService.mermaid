@@ -1,12 +1,12 @@
 sequenceDiagram
     participant Controller as SeatController
     participant Service as SeatService
-    participant concertScheduleRepository as concertScheduleRepository
+    participant ScheduleRepository as ScheduleRepository
     participant SeatRepository as SeatRepository
 
     Controller->>+Service: validateToken()
     alt findToken() !== true
-        Service->>+concertScheduleRepository: findDate()
+        Service->>+ScheduleRepository: findDate()
         alt findDate() !== true
             Service->>+SeatRepository: findSeat()
         end

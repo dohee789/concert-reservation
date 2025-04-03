@@ -1,0 +1,16 @@
+sequenceDiagram
+    participant TransactionFacade as TransactionFacade
+    participant BalanceService as BalanceService
+    participant ChargeService as ChargeService
+    participant PaymentService as PaymentService
+
+    TransactionFacade->>+BalanceService: checkBalance()
+    alt balance sufficient
+        TransactionFacade->>+PaymentService: makePayment()
+    else
+        TransactionFacade->>+ChargeService: chargeBalance()
+        alt charge succeed
+            TransactionFacade->>+PaymentService: makePayment()
+        end
+    end
+    PaymentService-->>-TransactionFacade: return true
