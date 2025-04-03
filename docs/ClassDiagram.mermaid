@@ -1,37 +1,17 @@
 classDiagram
-    class User {
-        -int id
-        -string name
-        -string email
-        -string password
-        -float balance
-        -datetime createdAt
-        -datetime updatedAt
-        +makeReservation(Seat seat) Reservation
-        +processTransaction(float amount, TransactionType type) Transaction
-        +getBalance() float
-        +updateBalance(float amount) void
-    }
-
-    class Token {
+    class Queue {
         -int id
         -int userId
         -string token
         -datetime expiredAt
-        -boolean isValid
         -datetime createdAt
-        +isExpired() boolean
-        +validateToken() boolean
+        +valiadateToken() boolean
     }
 
     class Concert {
         -int id
         -string name
         -string description
-        -ConcertStatus status
-        +getSchedules() List~Schedule~
-        +open() void
-        +close() void
     }
 
     class Schedule {
@@ -39,8 +19,6 @@ classDiagram
         -int concertId
         -date scheduleDate
         -time startTime
-        +getSeats() List~Seat~
-        +getAvailableSeats() List~Seat~
     }
 
     class Seat {
@@ -49,33 +27,26 @@ classDiagram
         -string seatNumber
         -float price
         -SeatStatus status
-        +reserve() boolean
-        +release() void
-        +isAvailable() boolean
     }
 
     class Reservation {
         -int id
         -int userId
         -int seatId
-        -int transactionId
+        -int scheduleId
         -ReservationStatus status
         -datetime reservedAt
         -datetime expiredAt
-        +complete() void
-        +cancel() void
-        +isExpired() boolean
     }
 
     class Transaction {
         -int id
         -int userId
-        -TransactionType type
+        -Payment type
         -float amount
-        -TransactionStatus status
+        -float balance
+        -Payment status
         -datetime processedAt
-        +process() boolean
-        +getStatus() TransactionStatus
     }
 
     class SeatStatus {
@@ -96,17 +67,16 @@ classDiagram
         CHARGE
     }
 
-    class TransactionStatus {
+    class PaymentStatus {
         <<enumeration>>
         SUCCESS
         FAILED
         PENDING
     }
 
-    User "1" -- "0..*" Reservation : makes
-    User "1" -- "0..*" Transaction : has
-    User "1" -- "0..1" Token : has
+    Queue "1" -- "0..*" Reservation : has
+    Queue "1" -- "0..*" Transaction : has
     Concert "1" -- "0..*" Schedule : has
-    Schedule "1" -- "0..*" Seat : contains
-    Seat "1" -- "0..*" Reservation : reserved in
-    Reservation "1" -- "1" Transaction : paid by
+    Schedule "1" -- "0..*" Seat : has
+    Seat "1" -- "0..*" Reservation : has
+    Reservation "1" -- "0..*" Transaction : has
