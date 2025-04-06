@@ -1,0 +1,15 @@
+sequenceDiagram
+    participant Controller as SeatController
+    participant Service as SeatService
+    participant ScheduleRepository as ScheduleRepository
+    participant SeatRepository as SeatRepository
+
+    Controller->>+Service: validateToken()
+    alt findToken() !== true
+        Service->>+ScheduleRepository: findDate()
+        alt findDate() !== true
+            Service->>+SeatRepository: findSeat()
+        end
+    end
+    SeatRepository-->>-Service: return seat, date
+    Service-->>-Controller: return seat, date

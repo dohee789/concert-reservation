@@ -1,0 +1,56 @@
+erDiagram
+    Queue ||--o{ Reservation : has
+    Queue ||--o{ Transaction : has
+
+    Queue {
+        int id PK
+        int userId FK
+        string token
+        datetime expiredAt
+        enum type "ACTIVE | WAITING"
+        datetime createdAt
+    }
+
+    Concert ||--o{ Schedule : has
+    Concert {
+        int id PK
+        string name
+        string description
+    }
+
+    Schedule ||--o{ Seat : has
+    Schedule {
+        int id PK
+        int concertId FK
+        date scheduleDate
+        time startTime
+    }
+
+    Seat ||--o{ Reservation : has
+    Seat {
+        int id PK
+        int scheduleId FK
+        float price
+        enum status "AVAILABLE | RESERVED"
+    }
+
+    Reservation ||--o{ Transaction : has
+    Reservation {
+        int id PK
+        int userId FK
+        int seatId FK
+        int transactionId FK
+        enum status "SUCCESS | FAILED"
+        datetime reservedAt
+        datetime expiredAt
+    }
+
+    Transaction {
+        int id PK
+        int userId FK
+        enum type "PAYMENT | CHARGE"
+        float amount
+        float balance
+        enum status "SUCCESS | FAILED | PENDING"
+        datetime processedAt
+    }

@@ -1,0 +1,82 @@
+classDiagram
+    class Queue {
+        -int id
+        -int userId
+        -string token
+        -datetime expiredAt
+        -datetime createdAt
+        +valiadateToken() boolean
+    }
+
+    class Concert {
+        -int id
+        -string name
+        -string description
+    }
+
+    class Schedule {
+        -int id
+        -int concertId
+        -date scheduleDate
+        -time startTime
+    }
+
+    class Seat {
+        -int id
+        -int scheduleId
+        -string seatNumber
+        -float price
+        -SeatStatus status
+    }
+
+    class Reservation {
+        -int id
+        -int userId
+        -int seatId
+        -int scheduleId
+        -ReservationStatus status
+        -datetime reservedAt
+        -datetime expiredAt
+    }
+
+    class Transaction {
+        -int id
+        -int userId
+        -Payment type
+        -float amount
+        -float balance
+        -Payment status
+        -datetime processedAt
+    }
+
+    class SeatStatus {
+        <<enumeration>>
+        AVAILABLE
+        RESERVED
+    }
+
+    class ReservationStatus {
+        <<enumeration>>
+        SUCCESS
+        FAILED
+    }
+
+    class TransactionType {
+        <<enumeration>>
+        PAYMENT
+        CHARGE
+    }
+
+    class PaymentStatus {
+        <<enumeration>>
+        SUCCESS
+        FAILED
+        PENDING
+    }
+
+    Queue "1" -- "0..*" Reservation : has
+    Queue "1" -- "0..*" Transaction : has
+    Concert "1" -- "0..*" Schedule : has
+    Schedule "1" -- "0..*" Seat : has
+    Seat "1" -- "0..*" Reservation : has
+    Reservation "1" -- "0..*" Transaction : has

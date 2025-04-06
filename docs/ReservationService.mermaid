@@ -1,0 +1,22 @@
+sequenceDiagram
+    participant Controller as ReservationController
+    participant Service as ReservationService
+    participant SeatRepository as SeatRepository
+    participant Scheduler as Scheduler
+
+    Controller->>+Service: validateToken()
+    alt findToken() === true
+        Service->>Service: reserveSeat()
+        Service->>+SeatRepository: findSeatStatus()
+        SeatRepository-->>-Service: return seat
+        Service->>Scheduler: startTimeout()
+    end
+    Scheduler->>Scheduler: wait(5 minutes)
+    alt reservation not completed
+        Scheduler->>+Service: releaseSeat()
+        Service->>+SeatRepository: makeSeatAvailable()
+        SeatRepository-->>-Service: Seat Available
+        Service-->>-Controller: return fail
+    else reservation completed
+        Service-->>-Controller: return true
+    end
