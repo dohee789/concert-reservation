@@ -10,7 +10,7 @@ fun getGitHash(): String {
 	}.standardOutput.asText.get().trim()
 }
 
-group = "kr.hhplus.be"
+group = "kr.hhplus.concert"
 version = getGitHash()
 
 java {
@@ -34,6 +34,9 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-web")
+
+	implementation ("org.projectlombok:lombok:1.18.20")
+	annotationProcessor ("org.projectlombok:lombok:1.18.20")
 
     // DB
 	runtimeOnly("com.mysql:mysql-connector-j")

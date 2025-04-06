@@ -1,4 +1,4 @@
-package kr.hhplus.be.server;
+package kr.hhplus.concert;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
