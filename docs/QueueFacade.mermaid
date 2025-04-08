@@ -9,7 +9,7 @@ sequenceDiagram
         QueueService->>+QueueService: saveToken()
         QueueService->>+QueueService: validateToken()
         alt validateToken() === true
-            loop every 5 minutes check queue type
+            loop every 5 seconds check queue type
                 QueueService->>+QueueService: updateToken()
             end
         end
