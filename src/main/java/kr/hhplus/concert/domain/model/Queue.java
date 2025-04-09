@@ -40,9 +40,9 @@ public class Queue {
         return LocalDateTime.now().isAfter(this.expiredAt);
     }
 
-    public void expireToken(Queue queue) {
+    public void expireToken() {
         if (isExpired()) {
-            queue.queueStatus = QueueStatus.EXPIRED;
+            this.queueStatus = QueueStatus.EXPIRED;
         }
     }
 }
