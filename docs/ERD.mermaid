@@ -33,7 +33,7 @@ erDiagram
         int scheduleId FK
         int seatNumber
         float price
-        enum status "AVAILABLE | RESERVED"
+        enum status "AVAILABLE | RESERVED "
     }
 
     Reservation ||--o{ Transaction : has
@@ -42,7 +42,7 @@ erDiagram
         int userId FK
         int seatId FK
         int transactionId FK
-        enum status "SUCCESS | FAILED"
+        enum status "SUCCESS | PENDING | FAILED"
         datetime reservedAt
         datetime expiredAt
     }
@@ -53,6 +53,6 @@ erDiagram
         enum type "PAYMENT | CHARGE"
         float amount
         float balance
-        enum status "SUCCESS | FAILED | PENDING"
+        enum status "SUCCESS | FAILED "
         datetime processedAt
     }

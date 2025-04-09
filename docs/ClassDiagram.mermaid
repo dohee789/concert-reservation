@@ -59,6 +59,7 @@ classDiagram
     class ReservationStatus {
         <<enumeration>>
         SUCCESS
+        PENDING
         FAILED
     }
 
@@ -73,7 +74,6 @@ classDiagram
         <<enumeration>>
         SUCCESS
         FAILED
-        PENDING
     }
 
     Queue "1" -- "0..*" Reservation : has
