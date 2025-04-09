@@ -2,7 +2,7 @@ package kr.hhplus.concert.domain.service;
 
 import kr.hhplus.concert.domain.model.Queue;
 import kr.hhplus.concert.domain.model.enums.QueueStatus;
-import kr.hhplus.concert.domain.repository.QueueRepository;
+import kr.hhplus.concert.infrastructure.persistence.repository.InMemoryQueueRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,12 +11,18 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDateTime;
+import java.util.NoSuchElementException;
+import java.util.Optional;
+import java.util.UUID;
+
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 @ExtendWith(MockitoExtension.class)
 class QueueServiceTest {
     @Mock
-    private QueueRepository queueRepository;
+    private InMemoryQueueRepository queueRepository;
 
     @InjectMocks
     private QueueService queueService;
