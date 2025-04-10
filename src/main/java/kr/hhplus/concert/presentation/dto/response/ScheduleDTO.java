@@ -1,4 +1,4 @@
-package kr.hhplus.concert.presentation.dto;
+package kr.hhplus.concert.presentation.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
