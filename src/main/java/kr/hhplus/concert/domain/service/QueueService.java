@@ -5,7 +5,6 @@ import kr.hhplus.concert.domain.repository.QueueRepository;
 import lombok.RequiredArgsConstructor;
 
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 public class QueueService {
@@ -29,6 +28,12 @@ public class QueueService {
     // 앞에 있는 사람 유저수 + 본인 = 나의 순번
     public int findMyEnQueueOrder(Long userId) {
         return queueRepository.countAheadOf(userId) + 1;
+    }
+
+    public void validateToken(Long userId) {
+        queueRepository.findByUserId(userId)
+                .filter(Queue::isActive)
+                .orElseThrow(() -> new NoSuchElementException("유효한 ACTIVE 상태의 유저가 없습니다."));
     }
 
 
