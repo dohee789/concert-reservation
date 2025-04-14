@@ -1,0 +1,16 @@
+sequenceDiagram
+    participant QueueFacade as QueueFacade
+    participant UserService as UserService
+    participant QueueService as QueueService
+
+    QueueFacade->>+UserService: validateUser()
+    alt validateUser() === true
+        UserService->>+QueueService: generateToken()
+        QueueService->>+QueueService: saveToken()
+        QueueService->>+QueueService: validateToken()
+        alt validateToken() === true
+            loop every 5 seconds check queue type
+                QueueService->>+QueueService: updateToken()
+            end
+        end
+    end

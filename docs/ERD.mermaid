@@ -1,13 +1,12 @@
 erDiagram
     Queue ||--o{ Reservation : has
-    Queue ||--o{ Transaction : has
 
     Queue {
         int id PK
         long userId FK
         string token
         datetime expiredAt
-        enum type "ACTIVE | WAITING"
+        enum status "ACTIVE | WAITING | EXPIRED"
         datetime enteredAt
     }
 
@@ -30,29 +29,25 @@ erDiagram
     Seat {
         int id PK
         int concertId FK
-        int scheduleId FK
         int seatNumber
         float price
-        enum status "AVAILABLE | RESERVED"
+        enum status "AVAILABLE | PENDING | RESERVED "
     }
 
-    Reservation ||--o{ Transaction : has
+    Reservation ||--o{ Payment : has
     Reservation {
         int id PK
         int userId FK
         int seatId FK
-        int transactionId FK
-        enum status "SUCCESS | FAILED"
+        int paymentId FK
         datetime reservedAt
         datetime expiredAt
     }
 
-    Transaction {
+    Payment {
         int id PK
         int userId FK
-        enum type "PAYMENT | CHARGE"
-        float amount
         float balance
-        enum status "SUCCESS | FAILED | PENDING"
         datetime processedAt
     }
+

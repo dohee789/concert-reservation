@@ -59,20 +59,21 @@ classDiagram
     class ReservationStatus {
         <<enumeration>>
         SUCCESS
+        PENDING
         FAILED
     }
 
-    class TransactionType {
+    class QueueStatusType {
         <<enumeration>>
-        PAYMENT
-        CHARGE
+        ACTIVE
+        WAITING
+        EXPIRED
     }
 
     class PaymentStatus {
         <<enumeration>>
         SUCCESS
         FAILED
-        PENDING
     }
 
     Queue "1" -- "0..*" Reservation : has
