@@ -5,12 +5,13 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
 @Builder
 public class Queue {
-    Integer id;
+    Long id;
     Long userId;
     String token;
     LocalDateTime expiredAt;

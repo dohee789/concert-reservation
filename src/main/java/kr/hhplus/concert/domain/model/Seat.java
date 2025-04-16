@@ -1,28 +1,25 @@
 package kr.hhplus.concert.domain.model;
 
 import kr.hhplus.concert.domain.model.enums.SeatStatus;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 @Getter
+@AllArgsConstructor
+@RequiredArgsConstructor
 @Builder
 public class Seat {
-    private Integer id;
-    private Integer concertScheduleId;
+    private final ConcertSchedule concertSchedule;
+
+    private Long id;
     private Integer seatNumber;
     private Float price;
 
     private SeatStatus seatStatus;
 
-    public Seat(Integer id, Integer concertScheduleId, Integer seatNumber, Float price, SeatStatus seatStatus) {
-        this.id = id;
-        this.concertScheduleId = concertScheduleId;
-        this.seatNumber = seatNumber;
-        this.price = price;
-        this.seatStatus = seatStatus;
-    }
-
-    public void isReserved(){
+    public void reserve(){
         this.seatStatus = seatStatus.RESERVED;
     }
 }

@@ -1,5 +1,6 @@
 package kr.hhplus.concert.domain.service;
 
+import kr.hhplus.concert.domain.model.Concert;
 import kr.hhplus.concert.domain.model.ConcertSchedule;
 import kr.hhplus.concert.domain.repository.ConcertScheduleRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +13,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -32,11 +34,11 @@ class ConcertScheduleServiceTest {
     void findConcertSchedulesByIdAndDate_notFound() {
         // given
         Long concertId = 1L;
-        LocalDate inValidScheduleDate = LocalDate.of(2029, 4, 15);// 존재하지 않는 날짜
-        LocalDate ValidScheduleDate = LocalDate.of(2025, 4, 15);
+        LocalDateTime inValidScheduleDate = LocalDateTime.of(2029, 4, 15, 10, 10, 10);// 존재하지 않는 날짜
+        LocalDateTime ValidScheduleDate = LocalDateTime.of(2025, 4, 15, 10, 10, 10);
 
         ConcertSchedule schedule = new ConcertSchedule(
-                1, concertId, ValidScheduleDate, LocalTime.now()
+                1L, ValidScheduleDate, Concert.builder().build()
         );
 
         Mockito.when(concertScheduleRepository.findConcertSchedulesById(concertId)).thenReturn(List.of(schedule));

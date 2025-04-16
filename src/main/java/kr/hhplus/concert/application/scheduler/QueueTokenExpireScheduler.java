@@ -1,4 +1,4 @@
-package kr.hhplus.concert.infrastructure.scheduler;
+package kr.hhplus.concert.application.scheduler;
 
 import kr.hhplus.concert.domain.model.Queue;
 import kr.hhplus.concert.domain.repository.QueueRepository;

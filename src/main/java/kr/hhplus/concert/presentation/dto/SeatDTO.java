@@ -1,4 +1,4 @@
-package kr.hhplus.concert.presentation.dto.response;
+package kr.hhplus.concert.presentation.dto;
 
 import lombok.Builder;
 import lombok.Getter;

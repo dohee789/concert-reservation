@@ -30,8 +30,8 @@ public class QueueService {
         return queueRepository.countAheadOf(userId) + 1;
     }
 
-    public void validateToken(Long userId) {
-        queueRepository.findByUserId(userId)
+    public Queue getValidatedQueue(Long userId) {
+        return queueRepository.findByUserId(userId)
                 .filter(Queue::isActive)
                 .orElseThrow(() -> new NoSuchElementException("유효한 ACTIVE 상태의 유저가 없습니다."));
     }

@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Getter
 @Builder
 public class Payment {
-    private Integer id;
+    private Long id;
     private Long userId;
     private Float balance;
     private LocalDateTime processedAt;

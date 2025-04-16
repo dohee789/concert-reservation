@@ -20,7 +20,7 @@ public class ConcertFacade {
 
     public ConcertSchedule findSchedules(Long userId, Long id, LocalDate scheduleDate) {
         // 토큰 검증
-        queueService.validateToken(userId);
+        queueService.getValidatedQueue(userId);
         // 콘서트 찾기
         Concert concert = concertService.findConcertById(id);
         return concertScheduleService.findConcertSchedulesByIdAndDate(concert.id(), scheduleDate);

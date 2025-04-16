@@ -25,5 +25,12 @@ public class QueueFacade {
         return queueService.findMyEnQueueOrder(userId) + 1;
     }
 
+    public Queue getValidatedQueue(Long userId) {
+        // 유저 존재 유뮤 확인
+        userService.CheckExistsUser(userId);
+
+        // 유효한 Enqueue 반환
+        return queueService.getValidatedQueue(userId);
+    }
 
 }
