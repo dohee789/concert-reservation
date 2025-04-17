@@ -19,11 +19,4 @@ public class ConcertScheduleService {
                 .orElseThrow(() -> new NoSuchElementException("해당 날짜의 콘서트 스케줄이 없습니다."));
     }
 
-    public ConcertSchedule getConcertSchedule(Long concertId) {
-        return concertScheduleRepository.findConcertSchedulesById(concertId)
-                .stream()
-                .findFirst()
-                .orElseThrow(() -> new NoSuchElementException("해당 콘서트 스케줄을 찾을 수 없습니다."));
-    }
-
 }

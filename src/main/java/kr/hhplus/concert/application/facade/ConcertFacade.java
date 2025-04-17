@@ -26,10 +26,4 @@ public class ConcertFacade {
         Concert concert = concertService.findConcertById(id);
         return concertScheduleService.findConcertSchedulesByIdAndDate(concert.id(), scheduleDate);
     }
-
-    public Seat findSeats(Long userId, Long id, LocalDateTime scheduleDate, Long seatId) {
-        ConcertSchedule concertSchedule = findSchedules(userId, id, scheduleDate);
-        // 자리 찾기
-        return seatService.findSeat(concertSchedule.id(), seatId);
-    }
 }
