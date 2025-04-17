@@ -15,8 +15,8 @@ public class ReservationDTO {
     public record ReservationRequest (
         Long userId,
         Long concertId,
-        Integer concertScheduleId,
-        Integer seatId
+        Long concertScheduleId,
+        Long seatId
     ) {
         public ReservationCommand toCommand(String token) {
             return ReservationCommand.builder()

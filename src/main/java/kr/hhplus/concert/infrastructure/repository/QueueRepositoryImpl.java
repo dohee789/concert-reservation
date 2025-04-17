@@ -34,12 +34,12 @@ public class QueueRepositoryImpl implements QueueRepository {
     }
 
     @Override
-    public Integer countAheadOf(Long userId) {
+    public Long countAheadOf(Long userId) {
         QueueEntity enqueued = queueJpaRepository.findById(userId)
                 .filter(q -> q.getQueueStatus() == QueueStatus.ACTIVE)
-                .orElseThrow(() -> new NoSuchElementException("유효한 ACTIVE 상태의 유저가 없습니다."));
+                .orElseThrow(() -> new NoSuchElementException("유효한 ACTIVE 상태의 유저가 아닙니다."));
 
-        return (int) queueJpaRepository.findAll().stream()
+        return queueJpaRepository.findAll().stream()
                 .filter(q -> q.getQueueStatus() == QueueStatus.ACTIVE)
                 .filter(q -> q.getEnteredAt().isBefore(enqueued.getEnteredAt()))
                 .count();

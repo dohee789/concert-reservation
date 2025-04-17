@@ -9,7 +9,7 @@ import java.util.NoSuchElementException;
 @RequiredArgsConstructor
 public class QueueService {
     private final QueueRepository queueRepository;
-    private static final int MAX_ACTIVE_COUNT = 50;
+    private static final Long MAX_ACTIVE_COUNT = 50L;
 
     public Queue registerToken(Long userId) {
         Queue token;
@@ -25,15 +25,19 @@ public class QueueService {
         return token;
     }
 
-    // 앞에 있는 사람 유저수 + 본인 = 나의 순번
-    public int findMyEnQueueOrder(Long userId) {
-        return queueRepository.countAheadOf(userId) + 1;
-    }
-
+    // ( 앞에 있는 사람 유저수 + 본인 = 나의 순번 ) <= MAX 만족시 유효한 활성열
     public Queue getValidatedQueue(Long userId) {
-        return queueRepository.findByUserId(userId)
+        Queue queue = queueRepository.findByUserId(userId)
                 .filter(Queue::isActive)
                 .orElseThrow(() -> new NoSuchElementException("유효한 ACTIVE 상태의 유저가 없습니다."));
+
+        Long myOrder = queueRepository.countAheadOf(userId) + 1L;
+
+        if (myOrder > MAX_ACTIVE_COUNT) {
+            throw new IllegalStateException("활성 큐 최대 허용 인원을 초과했습니다.");
+        }
+
+        return queue;
     }
 
 
