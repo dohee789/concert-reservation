@@ -7,6 +7,7 @@ import kr.hhplus.concert.domain.model.Seat;
 import kr.hhplus.concert.domain.repository.ReservationRepository;
 import lombok.RequiredArgsConstructor;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -18,8 +19,8 @@ public class ReservationService {
         return reservationRepository.save(reservation);
     }
 
-    public Optional<Reservation> getReservation(Long reservationId) {
-        return reservationRepository.findById(reservationId);
+    public Reservation getReservation(Long userId) {
+        return reservationRepository.findById(userId)
+                .orElseThrow(() -> new NoSuchElementException("예약 정보를 찾을 수 없습니다."));
     }
-
 }

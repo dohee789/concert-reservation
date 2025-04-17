@@ -35,7 +35,7 @@ class ReservationServiceTest {
     void makeConcertReservation_success() {
         // given
         Long userId = 1L;
-        Integer seatId = 100;
+        Long seatId = 100L;
         ConcertSchedule concertSchedule = new ConcertSchedule(userId, LocalDateTime.now(), Concert.builder().build());
         Seat seat = Seat.builder().seatNumber(seatId).concertSchedule(concertSchedule).seatStatus(SeatStatus.AVAILABLE).build();
         Queue queue = Queue.builder().userId(userId).queueStatus(QueueStatus.ACTIVE).build();
@@ -60,7 +60,7 @@ class ReservationServiceTest {
         Reservation reservation = Reservation.create(Queue.builder().build(), Seat.builder().build());
         Mockito.when(reservationRepository.findById(reservationId)).thenReturn(Optional.ofNullable(reservation));
 
-        Optional<Reservation> result = reservationService.getReservation(reservationId);
+        Reservation result = reservationService.getReservation(reservationId);
         // then
         assertThat(result).isNotNull();
         Mockito.verify(reservationRepository).findById(reservationId);

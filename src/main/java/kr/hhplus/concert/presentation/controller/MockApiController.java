@@ -146,9 +146,9 @@ public class MockApiController {
             )
     )
     @GetMapping("/transaction/balance")
-    public ResponseEntity<TransactionDTO.BalanceResponse> getBalance(@RequestParam long userId) {
+    public ResponseEntity<PaymentDTO.BalanceResponse> getBalance(@RequestParam long userId) {
         float currentBalance = 1000F;
-        return ResponseEntity.ok(TransactionDTO.BalanceResponse.builder()
+        return ResponseEntity.ok(PaymentDTO.BalanceResponse.builder()
                 .userId(userId)
                 .balance(currentBalance)
                 .build());
@@ -165,14 +165,14 @@ public class MockApiController {
             )
     )
     @PostMapping("/transaction/charge")
-    public ResponseEntity<TransactionDTO.BalanceResponse> chargeBalance(
+    public ResponseEntity<PaymentDTO.BalanceResponse> chargeBalance(
             @RequestParam long userId,
             @RequestParam float amount
     ) {
         float currentBalance = 1000F;
         float newBalance = currentBalance + amount;
 
-        return ResponseEntity.ok(TransactionDTO.BalanceResponse.builder()
+        return ResponseEntity.ok(PaymentDTO.BalanceResponse.builder()
                 .userId(userId)
                 .balance(newBalance)
                 .build());

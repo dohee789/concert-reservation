@@ -33,6 +33,7 @@ public class ReservationController {
             )
     )
 
+    @PostMapping
     public ResponseEntity<ReservationDTO.ReservationResponse> reserve(
             @RequestHeader("Token") String token,
             @RequestBody @Valid ReservationDTO.ReservationRequest request

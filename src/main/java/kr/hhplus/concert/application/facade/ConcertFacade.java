@@ -10,6 +10,7 @@ import kr.hhplus.concert.domain.service.SeatService;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @RequiredArgsConstructor
 public class ConcertFacade {
@@ -18,7 +19,7 @@ public class ConcertFacade {
     private ConcertScheduleService concertScheduleService;
     private SeatService seatService;
 
-    public ConcertSchedule findSchedules(Long userId, Long id, LocalDate scheduleDate) {
+    public ConcertSchedule findSchedules(Long userId, Long id, LocalDateTime scheduleDate) {
         // 토큰 검증
         queueService.getValidatedQueue(userId);
         // 콘서트 찾기
@@ -26,7 +27,7 @@ public class ConcertFacade {
         return concertScheduleService.findConcertSchedulesByIdAndDate(concert.id(), scheduleDate);
     }
 
-    public Seat findSeats(Long userId, Long id, LocalDate scheduleDate, Integer seatId) {
+    public Seat findSeats(Long userId, Long id, LocalDateTime scheduleDate, Long seatId) {
         ConcertSchedule concertSchedule = findSchedules(userId, id, scheduleDate);
         // 자리 찾기
         return seatService.findSeat(concertSchedule.id(), seatId);
