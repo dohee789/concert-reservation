@@ -18,7 +18,7 @@ public class SeatEntity {
     private Long id;
 
     @Column(nullable = false)
-    private Integer seatNumber;
+    private Long seatNumber;
 
     @Column(nullable = false)
     private Float price;

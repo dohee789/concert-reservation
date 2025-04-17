@@ -25,8 +25,8 @@ public class ReservationRepositoryImpl implements ReservationRepository {
 
 
     @Override
-    public Optional<Reservation> findById(Long reservationId) {
-        return reservationJpaRepository.findById(reservationId)
+    public Optional<Reservation> findById(Long userId) {
+        return reservationJpaRepository.findById(userId)
                 .map(ReservationEntity::of);
     }
 }

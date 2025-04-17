@@ -47,7 +47,7 @@ class PaymentServiceTest {
         // given
         Long userId = 1L;
         Float amount = 500F;
-        Payment existing = Payment.create(userId, 1000F);
+        Payment existing = Payment.create(userId);
         Mockito.when(paymentRepository.findByUserId(userId)).thenReturn(Optional.of(existing));
         // when
         Payment updated = paymentService.chargeBalance(userId, amount);
@@ -62,7 +62,7 @@ class PaymentServiceTest {
         // given
         Long userId = 1L;
         Float amount = 500F;
-        Payment existing = Payment.create(userId, 100F);
+        Payment existing = Payment.create(userId);
         Mockito.when(paymentRepository.findByUserId(userId)).thenReturn(Optional.of(existing));
         // when
         // then

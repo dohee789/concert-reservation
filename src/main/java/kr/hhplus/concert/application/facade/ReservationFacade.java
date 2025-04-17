@@ -3,16 +3,12 @@ package kr.hhplus.concert.application.facade;
 import kr.hhplus.concert.application.dto.ReservationCommand;
 import kr.hhplus.concert.application.dto.ReservationResult;
 import kr.hhplus.concert.domain.model.Queue;
-import kr.hhplus.concert.domain.model.ConcertSchedule;
 import kr.hhplus.concert.domain.model.Reservation;
 import kr.hhplus.concert.domain.model.Seat;
-import kr.hhplus.concert.domain.service.ConcertScheduleService;
 import kr.hhplus.concert.domain.service.QueueService;
 import kr.hhplus.concert.domain.service.ReservationService;
 import kr.hhplus.concert.domain.service.SeatService;
 import lombok.RequiredArgsConstructor;
-
-import java.util.List;
 
 @RequiredArgsConstructor
 public class ReservationFacade {

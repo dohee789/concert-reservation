@@ -10,17 +10,18 @@ import lombok.AllArgsConstructor;
 public class PaymentService {
     private final PaymentRepository paymentRepository;
 
-    public Float getBalance(Long userId) {
-        return paymentRepository.getBalance(userId);
+    public Payment getBalance(Long userId) {
+        Payment payment = paymentRepository.findByUserId(userId)
+                .orElseGet(() -> Payment.create(userId));
+        return payment;
     }
 
     public Payment chargeBalance(Long userId, Float amount) {
         Payment payment = paymentRepository.findByUserId(userId)
-                .orElseGet(() -> Payment.create(userId, 0F));
+                .orElseGet(() -> Payment.create(userId));
 
         payment.charge(amount);
-        paymentRepository.save(payment);
-        return payment;
+        return paymentRepository.save(payment);
     }
 
     public Payment payBalance(Long userId, Float amount) {
@@ -32,8 +33,7 @@ public class PaymentService {
         }
 
         payment.pay(amount);
-        paymentRepository.save(payment);
-        return payment;
+        return paymentRepository.save(payment);
     }
 
 }

@@ -14,12 +14,16 @@ public class Seat {
     private final ConcertSchedule concertSchedule;
 
     private Long id;
-    private Integer seatNumber;
+    private Long seatNumber;
     private Float price;
 
     private SeatStatus seatStatus;
 
     public void reserve(){
         this.seatStatus = seatStatus.RESERVED;
+    }
+
+    public void withhold(){
+        this.seatStatus = seatStatus.AVAILABLE;
     }
 }

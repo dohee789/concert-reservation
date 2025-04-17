@@ -19,6 +19,8 @@ public class Queue {
 
     private QueueStatus queueStatus;
 
+    private static final int MAX_QUEUE_SIZE = 100;
+
     public static Queue generateToken(Long userId) {
         return Queue.builder()
                 .userId(userId)
