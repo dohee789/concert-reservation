@@ -5,6 +5,7 @@ import kr.hhplus.concert.domain.repository.ReservationRepository;
 import kr.hhplus.concert.infrastructure.entity.ReservationEntity;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -16,6 +17,7 @@ public class ReservationRepositoryImpl implements ReservationRepository {
 
 
     @Override
+    @Transactional
     public Reservation save(Reservation reservation) {
         ReservationEntity reservationEntity = reservationJpaRepository.save(ReservationEntity.from(reservation));
         return reservationEntity.of();

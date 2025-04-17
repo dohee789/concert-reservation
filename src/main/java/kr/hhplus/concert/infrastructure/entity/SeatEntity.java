@@ -28,11 +28,7 @@ public class SeatEntity {
     private SeatStatus seatStatus;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(
-            name = "concert_schedule_id",
-            nullable = false,
-            foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT)
-    )
+    @JoinColumn(name = "concert_schedule_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private ConcertScheduleEntity concertSchedule;
 
     public static SeatEntity from(Seat seat) {

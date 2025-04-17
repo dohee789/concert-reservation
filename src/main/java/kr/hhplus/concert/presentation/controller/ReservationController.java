@@ -9,7 +9,6 @@ import jakarta.validation.Valid;
 import kr.hhplus.concert.application.dto.ReservationCommand;
 import kr.hhplus.concert.application.dto.ReservationResult;
 import kr.hhplus.concert.application.facade.ReservationFacade;
-import kr.hhplus.concert.domain.model.Reservation;
 import kr.hhplus.concert.presentation.dto.ReservationDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +21,8 @@ public class ReservationController {
 
     private final ReservationFacade reservationFacade;
 
-    @Tag(name = "Reservation", description = "좌석 예약 및 조회 API")
-    @Operation(summary = "좌석 예약", description = "콘서트 좌석을 예약합니다")
+    @Tag(name = "Reservation", description = "콘서트 예약 API")
+    @Operation(summary = "콘서트 예약", description = "콘서트를 예약합니다")
     @ApiResponse(responseCode = "200", description = "성공",
             content = @Content(
                     mediaType = "application/json",
@@ -33,7 +32,7 @@ public class ReservationController {
                     )
             )
     )
-    @PostMapping("/api/v1/reservation")
+
     public ResponseEntity<ReservationDTO.ReservationResponse> reserve(
             @RequestHeader("Token") String token,
             @RequestBody @Valid ReservationDTO.ReservationRequest request
