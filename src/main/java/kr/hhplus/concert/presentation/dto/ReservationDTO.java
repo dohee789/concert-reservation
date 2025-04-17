@@ -32,9 +32,8 @@ public class ReservationDTO {
     public record ReservationResponse (
         Long userId,
         String concertName,
-        LocalDate concertScheduleDate,
-        Integer seatNumber,
-        LocalDateTime reservedAt
+        LocalDateTime concertScheduleDate,
+        Long seatNumber
     ) {
         public static ReservationResponse of(ReservationResult result) {
             return ReservationResponse.builder()
@@ -42,7 +41,6 @@ public class ReservationDTO {
                     .concertName(result.concertName())
                     .concertScheduleDate(result.concertScheduleDate())
                     .seatNumber(result.seatNumber())
-                    .reservedAt(result.reservedAt())
                     .build();
         }
     }

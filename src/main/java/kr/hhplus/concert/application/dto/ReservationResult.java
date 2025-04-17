@@ -10,14 +10,14 @@ import java.time.LocalDateTime;
 public record ReservationResult (
     Long userId,
     String concertName,
-    LocalDate concertScheduleDate,
-    Integer seatNumber,
+    LocalDateTime concertScheduleDate,
+    Long seatNumber,
     LocalDateTime reservedAt
 ) {
     public static ReservationResult from(Reservation reservation) {
         return ReservationResult.builder()
                 .userId(reservation.getQueue().getUserId())
-                .concertName(reservation.getSeat().getConcert().name())
+                .concertName(reservation.getSeat().getConcertSchedule().concert().name())
                 .concertScheduleDate(reservation.getSeat().getConcertSchedule().scheduleDateTime())
                 .seatNumber(reservation.getSeat().getSeatNumber())
                 .reservedAt(reservation.getReservedAt())
