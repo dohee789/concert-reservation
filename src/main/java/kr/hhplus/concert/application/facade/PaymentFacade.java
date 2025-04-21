@@ -3,16 +3,15 @@ package kr.hhplus.concert.application.facade;
 import kr.hhplus.concert.domain.model.Wallet;
 import kr.hhplus.concert.domain.model.Reservation;
 import kr.hhplus.concert.domain.model.Seat;
-import kr.hhplus.concert.domain.service.WalletService;
-import kr.hhplus.concert.domain.service.QueueService;
-import kr.hhplus.concert.domain.service.ReservationService;
-import kr.hhplus.concert.domain.service.SeatService;
+import kr.hhplus.concert.domain.model.WalletHistory;
+import kr.hhplus.concert.domain.service.*;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class PaymentFacade {
 
-    private final WalletService paymentService;
+    private final WalletHistoryService walletHistoryService;
+    private final WalletService walletService;
     private final ReservationService reservationService;
     private final QueueService queueService;
     private final SeatService seatService;
@@ -25,7 +24,11 @@ public class PaymentFacade {
         // 좌석 조회
         Seat seat = seatService.findSeat(reservation.getSeat().getConcertSchedule().id(), reservation.getSeat().getSeatNumber());
         // 결제
-        return paymentService.payBalance(userId, seat.getPrice());
+        Wallet wallet = walletService.payBalance(userId, seat.getPrice());
+        // 결제 내역 저장
+        walletHistoryService.save(wallet);
+
+        return wallet;
     }
 
 }

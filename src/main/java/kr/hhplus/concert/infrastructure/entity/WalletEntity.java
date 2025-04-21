@@ -34,13 +34,13 @@ public class WalletEntity {
 
     private LocalDateTime processedAt;
 
-    public static WalletEntity from(Wallet payment) {
+    public static WalletEntity from(Wallet wallet) {
         return WalletEntity.builder()
-                .id(payment.getId())
-                .user(UserEntity.builder().id(payment.getUserId()).build())
-                .balance(payment.getBalance())
-                .paymentType(payment.getPaymentType())
-                .processedAt(payment.getProcessedAt())
+                .id(wallet.getId())
+                .user(UserEntity.builder().id(wallet.getUserId()).build())
+                .balance(wallet.getBalance())
+                .paymentType(wallet.getPaymentType())
+                .processedAt(wallet.getProcessedAt())
                 .build();
     }
 

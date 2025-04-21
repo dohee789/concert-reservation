@@ -11,19 +11,19 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class WalletRepositoryImpl implements WalletRepository {
 
-    private final WalletJpaRepository paymentJpaRepository;
+    private final WalletJpaRepository walletJpaRepository;
 
     @Override
     public Optional<Wallet> findByUserId(Long userId) {
-        return paymentJpaRepository.findById(userId)
+        return walletJpaRepository.findById(userId)
                 .map(WalletEntity::of);
     }
 
     @Override
     @Transactional
     public Wallet save(Wallet payment) {
-        WalletEntity paymentEntity = paymentJpaRepository.save(WalletEntity.from(payment));
-        return paymentEntity.of();
+        WalletEntity walletEntity = walletJpaRepository.save(WalletEntity.from(payment));
+        return walletEntity.of();
     }
 
 }
