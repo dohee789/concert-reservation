@@ -7,9 +7,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import kr.hhplus.concert.application.facade.PaymentFacade;
-import kr.hhplus.concert.domain.model.Payment;
+import kr.hhplus.concert.domain.model.Wallet;
 import kr.hhplus.concert.presentation.dto.PaymentDTO;
-import kr.hhplus.concert.presentation.dto.ReservationDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,11 +32,11 @@ public class PaymentController {
     )
 
     @PostMapping
-    public ResponseEntity<Payment> payment(
+    public ResponseEntity<Wallet> payment(
             @RequestHeader("Token") String token,
             @RequestBody @Valid PaymentDTO.PaymentRequest request
     ) {
-        Payment payment = paymentFacade.payment(request.userId(), request.amount());
+        Wallet payment = paymentFacade.payment(request.userId(), request.amount());
         return ResponseEntity.ok(payment);
     }
 }

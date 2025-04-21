@@ -6,7 +6,11 @@ import kr.hhplus.concert.domain.model.enums.SeatStatus;
 import lombok.*;
 
 @Entity
-@Table(name = "seat")
+@Table(name = "seat",
+        indexes = {
+        @Index(name = "idx_concert_schedule_id",  columnList="concert_schedule_id"),
+        @Index(name = "idx_seat_status",  columnList="seat_status")},
+        uniqueConstraints = @UniqueConstraint(name = "unique_seat_number", columnNames = {"concert_schedule_id", "seat_number"}))
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor

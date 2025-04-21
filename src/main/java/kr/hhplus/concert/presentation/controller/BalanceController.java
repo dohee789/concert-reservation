@@ -7,9 +7,8 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import kr.hhplus.concert.domain.model.Payment;
-import kr.hhplus.concert.domain.service.PaymentService;
-import kr.hhplus.concert.presentation.dto.BalanceDTO;
+import kr.hhplus.concert.domain.model.Wallet;
+import kr.hhplus.concert.domain.service.WalletService;
 import kr.hhplus.concert.presentation.dto.PaymentDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class BalanceController {
 
-    private final PaymentService paymentService;
+    private final WalletService paymentService;
 
     @Tag(name = "Transaction", description = "금액 충전 API")
     @Operation(summary = "잔액 충전", description = "유저 ID를 기반으로 금액을 충전합니다")
@@ -33,11 +32,11 @@ public class BalanceController {
             )
     )
     @PostMapping("/charge")
-    public ResponseEntity<Payment> chargeBalance(
+    public ResponseEntity<Wallet> chargeBalance(
             @RequestHeader("Token") String token,
             @RequestBody @Valid PaymentDTO.PaymentRequest request
     ) {
-        Payment charge = paymentService.chargeBalance(request.userId(), request.balance());
+        Wallet charge = paymentService.chargeBalance(request.userId(), request.balance());
         return ResponseEntity.ok(charge);
     }
 
@@ -52,10 +51,10 @@ public class BalanceController {
             )
     )
     @GetMapping
-    public ResponseEntity<Payment> getBalance(
+    public ResponseEntity<Wallet> getBalance(
             @PathVariable Long userId
     ) {
-        Payment payment = paymentService.getBalance(userId);
+        Wallet payment = paymentService.getBalance(userId);
         return ResponseEntity.ok((payment));
     }
 }

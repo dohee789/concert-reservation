@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Builder
-public class Payment {
+public class Wallet {
     private Long id;
     private Long userId;
     private Float amount;
@@ -17,8 +17,8 @@ public class Payment {
 
     private PaymentType paymentType;
 
-    public static Payment create(Long userId) {
-        return Payment.builder()
+    public static Wallet create(Long userId) {
+        return Wallet.builder()
                 .userId(userId)
                 .balance(0F)
                 .processedAt(LocalDateTime.now())

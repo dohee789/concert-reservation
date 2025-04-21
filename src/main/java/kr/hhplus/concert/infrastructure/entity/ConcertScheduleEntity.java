@@ -8,7 +8,10 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "concert_schedule")
+@Table(name = "concert_schedule",
+        indexes = @Index(name = "idx_concert_id", columnList = "concert_id"),
+        uniqueConstraints = @UniqueConstraint(name = "unique_concert_schedule", columnNames = {"concert_id", "schedule_date_time"})
+)
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor

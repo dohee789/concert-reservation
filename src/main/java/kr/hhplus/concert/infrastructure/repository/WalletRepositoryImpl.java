@@ -1,0 +1,29 @@
+package kr.hhplus.concert.infrastructure.repository;
+
+import kr.hhplus.concert.domain.model.Wallet;
+import kr.hhplus.concert.domain.repository.WalletRepository;
+import kr.hhplus.concert.infrastructure.entity.WalletEntity;
+import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
+
+@RequiredArgsConstructor
+public class WalletRepositoryImpl implements WalletRepository {
+
+    private final WalletJpaRepository paymentJpaRepository;
+
+    @Override
+    public Optional<Wallet> findByUserId(Long userId) {
+        return paymentJpaRepository.findById(userId)
+                .map(WalletEntity::of);
+    }
+
+    @Override
+    @Transactional
+    public Wallet save(Wallet payment) {
+        WalletEntity paymentEntity = paymentJpaRepository.save(WalletEntity.from(payment));
+        return paymentEntity.of();
+    }
+
+}

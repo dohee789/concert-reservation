@@ -2,8 +2,8 @@ package kr.hhplus.concert.domain.service;
 
 
 import kr.hhplus.concert.domain.exception.InSufficientBalanceException;
-import kr.hhplus.concert.domain.model.Payment;
-import kr.hhplus.concert.domain.repository.PaymentRepository;
+import kr.hhplus.concert.domain.model.Wallet;
+import kr.hhplus.concert.domain.repository.WalletRepository;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,10 +23,10 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class PaymentServiceTest {
 
     @Mock
-    private PaymentRepository paymentRepository;
+    private WalletRepository paymentRepository;
 
     @InjectMocks
-    private PaymentService paymentService;
+    private WalletService paymentService;
 
     @DisplayName("사용자의 잔액을 조회할 수 있다")
     @Test
@@ -47,10 +47,10 @@ class PaymentServiceTest {
         // given
         Long userId = 1L;
         Float amount = 500F;
-        Payment existing = Payment.create(userId);
+        Wallet existing = Wallet.create(userId);
         Mockito.when(paymentRepository.findByUserId(userId)).thenReturn(Optional.of(existing));
         // when
-        Payment updated = paymentService.chargeBalance(userId, amount);
+        Wallet updated = paymentService.chargeBalance(userId, amount);
         // then
         assertThat(updated.getBalance()).isEqualTo(1500F);
         Mockito.verify(paymentRepository).save(updated);
@@ -62,7 +62,7 @@ class PaymentServiceTest {
         // given
         Long userId = 1L;
         Float amount = 500F;
-        Payment existing = Payment.create(userId);
+        Wallet existing = Wallet.create(userId);
         Mockito.when(paymentRepository.findByUserId(userId)).thenReturn(Optional.of(existing));
         // when
         // then

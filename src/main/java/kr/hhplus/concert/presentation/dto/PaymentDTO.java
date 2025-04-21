@@ -1,7 +1,6 @@
 package kr.hhplus.concert.presentation.dto;
 
-import kr.hhplus.concert.domain.model.Payment;
-import kr.hhplus.concert.domain.model.enums.PaymentType;
+import kr.hhplus.concert.domain.model.Wallet;
 import lombok.Builder;
 
 import java.time.LocalDateTime;
@@ -22,7 +21,7 @@ public class PaymentDTO {
         Float balance,
         LocalDateTime processedAt
     ) {
-        public static PaymentResponse of(Payment payment) {
+        public static PaymentResponse of(Wallet payment) {
             return PaymentResponse.builder()
                     .id(payment.getId())
                     .balance(payment.getBalance())
