@@ -1,25 +1,39 @@
 package kr.hhplus.concert.domain.model;
 
+import kr.hhplus.concert.domain.model.enums.SeatStatus;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Getter
+@RequiredArgsConstructor
 @Builder
 public class Reservation {
-    private Integer id;
+
+    private final Queue queue;
+    private final Seat seat;
+
+    private Long id;
     private Long userId;
-    private Integer concertScheduleId;
-    private Integer seatId;
     private LocalDateTime reservedAt;
 
-    public static Reservation create(Long userId, Integer concertScheduleId, Integer seatId) {
+    public static Reservation create(Queue queue, Seat seat) {
+        if (!queue.isActive()) {
+            throw new IllegalStateException("예약 가능한 상태가 아닙니다.");
+        }
+        if (seat.getSeatStatus() != SeatStatus.AVAILABLE) {
+            throw new IllegalStateException("해당 좌석은 예약할 수 없습니다.");
+        }
+
+        seat.reserve();
+        queue.pending();
+
         return Reservation.builder()
-                .userId(userId)
-                .concertScheduleId(concertScheduleId)
-                .seatId(seatId)
+                .userId(queue.getUserId())
+                .seat(seat)
+                .reservedAt(LocalDateTime.now())
                 .build();
     }
-
 }

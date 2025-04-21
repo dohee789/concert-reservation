@@ -1,6 +1,8 @@
 package kr.hhplus.concert.domain.service;
 
-import kr.hhplus.concert.domain.model.Reservation;
+import kr.hhplus.concert.domain.model.*;
+import kr.hhplus.concert.domain.model.enums.QueueStatus;
+import kr.hhplus.concert.domain.model.enums.SeatStatus;
 import kr.hhplus.concert.domain.repository.ReservationRepository;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,6 +14,10 @@ import org.junit.jupiter.api.Test;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.time.LocalDateTime;
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(MockitoExtension.class)
@@ -29,17 +35,20 @@ class ReservationServiceTest {
     void makeConcertReservation_success() {
         // given
         Long userId = 1L;
-        Integer scheduleId = 10;
-        Integer seatId = 100;
-        Reservation reservation = Reservation.create(userId, scheduleId, seatId);
+        Long seatId = 100L;
+        ConcertSchedule concertSchedule = new ConcertSchedule(userId, LocalDateTime.now(), Concert.builder().build());
+        Seat seat = Seat.builder().seatNumber(seatId).concertSchedule(concertSchedule).seatStatus(SeatStatus.AVAILABLE).build();
+        Queue queue = Queue.builder().userId(userId).queueStatus(QueueStatus.ACTIVE).build();
+
+        Reservation reservation = Reservation.create(queue, seat);
         Mockito.when(reservationRepository.save(Mockito.any(Reservation.class))).thenReturn(reservation);
+
         // when
-        Reservation result = reservationService.makeReservation(userId, scheduleId, seatId);
+        Reservation result = reservationService.makeReservation(queue, seat);
+
         // then
         assertThat(result).isNotNull();
         assertThat(result.getUserId()).isEqualTo(userId);
-        assertThat(result.getConcertScheduleId()).isEqualTo(scheduleId);
-        assertThat(result.getSeatId()).isEqualTo(seatId);
         Mockito.verify(reservationRepository).save(Mockito.any(Reservation.class));
     }
 
@@ -47,14 +56,13 @@ class ReservationServiceTest {
     @Test
     void getConcertReservation_success() {
         // given
-        Integer reservationId = 1;
-        Reservation reservation = Reservation.create(1L, 10, 100);
-        Mockito.when(reservationRepository.findById(reservationId)).thenReturn(reservation);
+        Long reservationId = 1L;
+        Reservation reservation = Reservation.create(Queue.builder().build(), Seat.builder().build());
+        Mockito.when(reservationRepository.findById(reservationId)).thenReturn(Optional.ofNullable(reservation));
 
         Reservation result = reservationService.getReservation(reservationId);
         // then
         assertThat(result).isNotNull();
-        assertThat(result.getConcertScheduleId()).isEqualTo(10);
         Mockito.verify(reservationRepository).findById(reservationId);
     }
 

@@ -1,6 +1,7 @@
 package kr.hhplus.concert.presentation.controller;
 
 import kr.hhplus.concert.presentation.dto.*;
+import kr.hhplus.concert.presentation.dto.response.QueueResponseDTO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class MockApiControllerTest {
     @DisplayName("대기열 인입 및 토큰 발급 API 테스트")
     public void testCreateQueueToken() throws Exception {
         // Given
-        QueueDTO.Request request = new QueueDTO.Request();
+        QueueResponseDTO.Request request = new QueueResponseDTO.Request();
         request.setUserId(1L);
         String requestJson = objectMapper.writeValueAsString(request);
 
@@ -42,7 +43,7 @@ public class MockApiControllerTest {
                 .andReturn();
 
         String responseJson = result.getResponse().getContentAsString();
-        QueueDTO.Response response = objectMapper.readValue(responseJson, QueueDTO.Response.class);
+        QueueResponseDTO.Response response = objectMapper.readValue(responseJson, QueueResponseDTO.Response.class);
 
         assertEquals("q1w2e3r4", response.getToken());
         assertNotNull(response.getEnteredAt());
@@ -73,7 +74,7 @@ public class MockApiControllerTest {
         Long scheduleId = 1L;
 
         // When & Then
-        mockMvc.perform(get("/api/concert/{concertId}/schedule/{scheduleId}/seat", concertId, scheduleId)
+        mockMvc.perform(get("/api/concert/{concertId}/schedule/{concertScheduleId}/seat", concertId, scheduleId)
                         .header("TOKEN", token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.seatNumber").value(1))

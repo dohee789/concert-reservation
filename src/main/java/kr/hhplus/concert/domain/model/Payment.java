@@ -1,5 +1,6 @@
 package kr.hhplus.concert.domain.model;
 
+import kr.hhplus.concert.domain.model.enums.PaymentType;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -8,26 +9,31 @@ import java.time.LocalDateTime;
 @Getter
 @Builder
 public class Payment {
-    private Integer id;
+    private Long id;
     private Long userId;
+    private Float amount;
     private Float balance;
     private LocalDateTime processedAt;
 
-    public static Payment create(Long userId, Float balance) {
+    private PaymentType paymentType;
+
+    public static Payment create(Long userId) {
         return Payment.builder()
                 .userId(userId)
-                .balance(balance)
+                .balance(0F)
                 .processedAt(LocalDateTime.now())
                 .build();
 
     }
-    public void charge(Float balance) {
-        this.balance += balance;
+    public void charge(Float amount) {
+        this.balance += amount;
         this.processedAt = LocalDateTime.now();
+        this.paymentType = paymentType.CHARGE;
     }
 
-    public void pay(Float balance) {
-        this.balance -= balance;
+    public void pay(Float amount) {
+        this.balance -= amount;
         this.processedAt = LocalDateTime.now();
+        this.paymentType = paymentType.PAYMENT;
     }
 }

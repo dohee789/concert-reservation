@@ -6,14 +6,13 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import kr.hhplus.concert.presentation.dto.*;
+import kr.hhplus.concert.presentation.dto.response.QueueResponseDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/")
@@ -30,9 +29,9 @@ public class MockApiController {
             )
     )
     @PostMapping("/queue")
-    public ResponseEntity<QueueDTO.Response> createQueueToken(@RequestBody QueueDTO.Request request) {
+    public ResponseEntity<QueueResponseDTO.Response> createQueueToken(@RequestBody QueueResponseDTO.Request request) {
         return ResponseEntity.ok(
-                QueueDTO.Response.builder()
+                QueueResponseDTO.Response.builder()
                         .token("q1w2e3r4")
                         .enteredAt(LocalDateTime.now())
                         .expiredAt(LocalDateTime.now().plusMinutes(5)).build()
@@ -48,9 +47,9 @@ public class MockApiController {
             )
     )
     @GetMapping("/queue")
-    public ResponseEntity<QueueDTO.Response> getToken(@RequestParam Long userId) {
+    public ResponseEntity<QueueResponseDTO.Response> getToken(@RequestParam Long userId) {
         return ResponseEntity.ok(
-                QueueDTO.Response.builder()
+                QueueResponseDTO.Response.builder()
                         .token("q1w2e3r4")
                         .enteredAt(LocalDateTime.now())
                         .expiredAt(LocalDateTime.now().plusMinutes(5)).build()
@@ -63,7 +62,7 @@ public class MockApiController {
             content = @Content(
                     mediaType = "application/json",
                     examples = @ExampleObject(
-                            value = "{ \"scheduleDate\": \"yyyy-MM-dd\", \"startTime\": \"HH:mm\"}"
+                            value = "{ \"scheduleDateTime\": \"yyyy-MM-dd\", \"startTime\": \"HH:mm\"}"
                     )
             )
     )
@@ -90,7 +89,7 @@ public class MockApiController {
                     )
             )
     )
-    @GetMapping("/concert/{concertId}/schedule/{scheduleId}/seat")
+    @GetMapping("/concert/{concertId}/schedule/{concertScheduleId}/seat")
     public ResponseEntity<SeatDTO.Response> getSeat(
             @RequestHeader("TOKEN") String token,
             @PathVariable Long concertId,
@@ -147,9 +146,9 @@ public class MockApiController {
             )
     )
     @GetMapping("/transaction/balance")
-    public ResponseEntity<TransactionDTO.BalanceResponse> getBalance(@RequestParam long userId) {
+    public ResponseEntity<PaymentDTO.BalanceResponse> getBalance(@RequestParam long userId) {
         float currentBalance = 1000F;
-        return ResponseEntity.ok(TransactionDTO.BalanceResponse.builder()
+        return ResponseEntity.ok(PaymentDTO.BalanceResponse.builder()
                 .userId(userId)
                 .balance(currentBalance)
                 .build());
@@ -166,14 +165,14 @@ public class MockApiController {
             )
     )
     @PostMapping("/transaction/charge")
-    public ResponseEntity<TransactionDTO.BalanceResponse> chargeBalance(
+    public ResponseEntity<PaymentDTO.BalanceResponse> chargeBalance(
             @RequestParam long userId,
             @RequestParam float amount
     ) {
         float currentBalance = 1000F;
         float newBalance = currentBalance + amount;
 
-        return ResponseEntity.ok(TransactionDTO.BalanceResponse.builder()
+        return ResponseEntity.ok(PaymentDTO.BalanceResponse.builder()
                 .userId(userId)
                 .balance(newBalance)
                 .build());

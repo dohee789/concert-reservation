@@ -7,8 +7,12 @@ import java.util.Optional;
 
 public interface QueueRepository {
     Optional<Queue> findByUserId(Long userId);
-    void save(Queue queue);
+
+    Queue save(Queue queue);
+
     Long countActiveQueues();
-    Integer countAheadOf(Long userId);
+
+    Long countAheadOf(Long userId);
+
     List<Queue> findAll();
 }

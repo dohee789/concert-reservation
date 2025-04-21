@@ -17,14 +17,15 @@ public class PaymentFacade {
     private final QueueService queueService;
     private final SeatService seatService;
 
-    public Payment Payment(Long userId, Integer reservationId) {
-        // 토큰 검증
-        queueService.validateToken(userId);
+    public Payment payment(Long userId, Float amount) {
+        // 토큰 및 대기열 검증
+        queueService.getValidatedQueue(userId);
         // 예약 조회
-        Reservation reservation = reservationService.getReservation(reservationId);
+        Reservation reservation = reservationService.getReservation(userId);
         // 좌석 조회
-        Seat seat = seatService.findSeat(reservation.getConcertScheduleId(), reservation.getSeatId());
+        Seat seat = seatService.findSeat(reservation.getSeat().getConcertSchedule().id(), reservation.getSeat().getSeatNumber());
         // 결제
         return paymentService.payBalance(userId, seat.getPrice());
     }
+
 }

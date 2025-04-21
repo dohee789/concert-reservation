@@ -2,8 +2,10 @@ package kr.hhplus.concert.domain.repository;
 
 import kr.hhplus.concert.domain.model.Reservation;
 
+import java.util.Optional;
+
 public interface ReservationRepository {
     Reservation save(Reservation reservation);
 
-    Reservation findById(Integer reservationId);
+    Optional<Reservation> findById(Long userId);
 }

@@ -17,13 +17,12 @@ public class QueueFacade {
         return queueService.registerToken(userId);
     }
 
-    public int findMyEnQueueOrder(Long userId) {
+    public Queue getValidatedQueue(Long userId) {
         // 유저 존재 유뮤 확인
         userService.CheckExistsUser(userId);
 
-        // 앞에 있는 유저 수 + 본인 = 나의 순번
-        return queueService.findMyEnQueueOrder(userId) + 1;
+        // 유효한 Enqueue 인지 확인
+        return queueService.getValidatedQueue(userId);
     }
-
 
 }

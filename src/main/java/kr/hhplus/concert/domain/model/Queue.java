@@ -5,18 +5,21 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
 @Builder
 public class Queue {
-    Integer id;
+    Long id;
     Long userId;
     String token;
     LocalDateTime expiredAt;
     LocalDateTime enteredAt;
 
     private QueueStatus queueStatus;
+
+    private static final int MAX_QUEUE_SIZE = 100;
 
     public static Queue generateToken(Long userId) {
         return Queue.builder()
