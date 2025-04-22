@@ -15,7 +15,6 @@ public class ReservationRepositoryImpl implements ReservationRepository {
 
     private final ReservationJpaRepository reservationJpaRepository;
 
-
     @Override
     @Transactional
     public Reservation save(Reservation reservation) {

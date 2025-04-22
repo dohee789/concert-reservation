@@ -22,7 +22,7 @@ public class PaymentFacade {
         // 예약 조회
         Reservation reservation = reservationService.getReservation(userId);
         // 좌석 조회
-        Seat seat = seatService.findSeat(reservation.getSeat().getConcertSchedule().id(), reservation.getSeat().getSeatNumber());
+        Seat seat = seatService.findSeat(reservation.getSeat().getConcertSchedule().id());
         // 결제
         Wallet wallet = walletService.payBalance(userId, seat.getPrice());
         // 결제 내역 저장

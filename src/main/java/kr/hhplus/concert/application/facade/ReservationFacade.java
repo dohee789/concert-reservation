@@ -20,9 +20,9 @@ public class ReservationFacade {
         // 토큰 검증
         Queue queue = queueService.getValidatedQueue(command.userId());
         // 콘서트 좌석 찾기
-        Seat seat = seatService.findSeat(command.concertScheduleId(), command.seatId());
+        Seat seat = seatService.findSeat(command.concertScheduleId());
         // 좌석 점유
-        seatService.assignSeat(seat.getConcertSchedule().id(), command.seatId());
+        seatService.assignSeat(seat.getConcertSchedule().id());
         // 예약 정보 저장
         Reservation reservation = reservationService.makeReservation(queue, seat);
 
