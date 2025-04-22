@@ -35,6 +35,9 @@ public class SeatEntity {
     @JoinColumn(name = "concert_schedule_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private ConcertScheduleEntity concertSchedule;
 
+    @Version
+    private Long version;
+
     public static SeatEntity from(Seat seat) {
         return SeatEntity.builder()
                 .id(seat.getId())
@@ -42,6 +45,7 @@ public class SeatEntity {
                 .price(seat.getPrice())
                 .seatStatus(seat.getSeatStatus())
                 .concertSchedule(ConcertScheduleEntity.from(seat.getConcertSchedule()))
+                .version(seat.getVersion())
                 .build();
     }
 
@@ -52,6 +56,7 @@ public class SeatEntity {
                 .seatNumber(this.seatNumber)
                 .price(this.price)
                 .seatStatus(this.seatStatus)
+                .version(this.version)
                 .build();
     }
 }

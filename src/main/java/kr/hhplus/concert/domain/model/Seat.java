@@ -18,6 +18,8 @@ public class Seat {
 
     private SeatStatus seatStatus;
 
+    private Long version;
+
     public void reserve(){
         this.seatStatus = seatStatus.RESERVED;
     }
