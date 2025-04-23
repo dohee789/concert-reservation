@@ -5,8 +5,10 @@ import kr.hhplus.concert.domain.exception.UserNotFoundException;
 import kr.hhplus.concert.domain.model.Wallet;
 import kr.hhplus.concert.domain.repository.WalletRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Service
 @AllArgsConstructor
 public class WalletService {
     private final WalletRepository walletRepository;

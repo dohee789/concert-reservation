@@ -11,8 +11,10 @@ import kr.hhplus.concert.domain.service.ReservationService;
 import kr.hhplus.concert.domain.service.SeatService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Service
 @RequiredArgsConstructor
 public class ReservationFacade {
     private QueueService queueService;

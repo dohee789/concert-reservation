@@ -4,10 +4,11 @@ import kr.hhplus.concert.domain.model.Wallet;
 import kr.hhplus.concert.domain.model.WalletHistory;
 import kr.hhplus.concert.domain.repository.WalletHistoryRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-
+@Service
 @RequiredArgsConstructor
 public class WalletHistoryService {
     private final WalletHistoryRepository walletHistoryRepository;

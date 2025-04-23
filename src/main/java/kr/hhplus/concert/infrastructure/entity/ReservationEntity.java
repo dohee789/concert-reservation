@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Table(name = "reservation",
         indexes = {
         @Index(name = "idx_user_id", columnList = "user_id"),
-        @Index(name = "idx_processed_at",  columnList="processed_at")},
+        @Index(name = "idx_reserved_at",  columnList="reserved_at")},
         uniqueConstraints = @UniqueConstraint(name = "unique_concert_seat", columnNames = {"seat_id", "user_id"})
 )
 @Getter

@@ -2,16 +2,16 @@ package kr.hhplus.concert.application.facade;
 
 import kr.hhplus.concert.domain.model.Concert;
 import kr.hhplus.concert.domain.model.ConcertSchedule;
-import kr.hhplus.concert.domain.model.Seat;
 import kr.hhplus.concert.domain.service.ConcertScheduleService;
 import kr.hhplus.concert.domain.service.ConcertService;
 import kr.hhplus.concert.domain.service.QueueService;
 import kr.hhplus.concert.domain.service.SeatService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+@Service
 @RequiredArgsConstructor
 public class ConcertFacade {
     private QueueService queueService;

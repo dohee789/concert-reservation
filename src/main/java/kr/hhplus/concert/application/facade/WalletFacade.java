@@ -5,8 +5,10 @@ import kr.hhplus.concert.domain.model.Reservation;
 import kr.hhplus.concert.domain.model.Seat;
 import kr.hhplus.concert.domain.service.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Service
 @RequiredArgsConstructor
 public class WalletFacade {
 

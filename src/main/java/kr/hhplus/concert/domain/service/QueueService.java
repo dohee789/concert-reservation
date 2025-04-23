@@ -3,9 +3,11 @@ package kr.hhplus.concert.domain.service;
 import kr.hhplus.concert.domain.model.Queue;
 import kr.hhplus.concert.domain.repository.QueueRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
 
+@Service
 @RequiredArgsConstructor
 public class QueueService {
     private final QueueRepository queueRepository;

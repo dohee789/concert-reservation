@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-@Repository
+
 @RequiredArgsConstructor
 public class ReservationRepositoryImpl implements ReservationRepository {
 

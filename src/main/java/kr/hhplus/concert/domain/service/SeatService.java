@@ -1,14 +1,14 @@
 package kr.hhplus.concert.domain.service;
 
-import kr.hhplus.concert.domain.exception.SeatUnavailableException;
 import kr.hhplus.concert.domain.model.Seat;
-import kr.hhplus.concert.domain.model.enums.SeatStatus;
 import kr.hhplus.concert.domain.repository.SeatRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.NoSuchElementException;
 
+@Service
 @RequiredArgsConstructor
 public class SeatService {
     private final SeatRepository seatRepository;

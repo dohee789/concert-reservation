@@ -4,6 +4,7 @@ import kr.hhplus.concert.domain.model.WalletHistory;
 import kr.hhplus.concert.domain.repository.WalletHistoryRepository;
 import kr.hhplus.concert.infrastructure.entity.WalletHistoryEntity;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
