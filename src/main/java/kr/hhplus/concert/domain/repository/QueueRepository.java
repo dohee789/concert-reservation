@@ -17,5 +17,5 @@ public interface QueueRepository {
 
     List<Queue> findAll();
 
-    Optional<Queue> findByToken(UUID token);
+    Optional<Queue> findByToken(String token);
 }

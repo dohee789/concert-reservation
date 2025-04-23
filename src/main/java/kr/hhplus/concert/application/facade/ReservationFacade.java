@@ -10,6 +10,7 @@ import kr.hhplus.concert.domain.service.QueueService;
 import kr.hhplus.concert.domain.service.ReservationService;
 import kr.hhplus.concert.domain.service.SeatService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,8 +18,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 public class ReservationFacade {
+    @Autowired
     private QueueService queueService;
+    @Autowired
     private SeatService seatService;
+    @Autowired
     private ReservationService reservationService;
 
     @Transactional

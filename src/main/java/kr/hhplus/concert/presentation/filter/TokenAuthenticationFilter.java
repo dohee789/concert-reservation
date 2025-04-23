@@ -25,17 +25,16 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
                                     FilterChain filterChain)
             throws ServletException, IOException {
 
-        String tokenValue = request.getHeader("Token");
+        String token = request.getHeader("Token");
 
-        if (tokenValue == null) {
+        if (token == null) {
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
             response.getWriter().write("Token 헤더가 필요합니다.");
             return;
         }
 
         try {
-            UUID token = UUID.fromString(tokenValue);
-            Long userId = tokenResolver.resolveUserId(tokenValue);
+            Long userId = tokenResolver.resolveUserId(token);
 
             request.setAttribute("userId", userId);
 

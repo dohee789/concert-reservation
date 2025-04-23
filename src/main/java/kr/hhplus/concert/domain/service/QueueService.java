@@ -43,7 +43,7 @@ public class QueueService {
         return queue;
     }
 
-    public Queue findByToken(UUID token) {
+    public Queue findByToken(String token) {
         return queueRepository.findByToken(token)
                 .orElseThrow(() -> new NoSuchElementException("해당 토큰에 해당하는 큐가 존재하지 않습니다."));
     }

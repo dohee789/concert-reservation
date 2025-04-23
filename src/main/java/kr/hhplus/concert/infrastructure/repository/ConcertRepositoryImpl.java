@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 @RequiredArgsConstructor
 public class ConcertRepositoryImpl implements ConcertRepository {
 
@@ -30,7 +31,7 @@ public class ConcertRepositoryImpl implements ConcertRepository {
     }
 
     @Override
-    public List<Concert> concertList() {
+    public List<Concert> findAllConcerts() {
         return concertJpaRepository.findAll().stream()
                 .map(ConcertEntity::of)
                 .toList();

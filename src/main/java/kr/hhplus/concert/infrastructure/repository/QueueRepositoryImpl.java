@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import java.util.*;
 
+@Repository
 @RequiredArgsConstructor
 public class QueueRepositoryImpl implements QueueRepository {
 
@@ -54,7 +55,7 @@ public class QueueRepositoryImpl implements QueueRepository {
     }
 
     @Override
-    public Optional<Queue> findByToken(UUID token) {
+    public Optional<Queue> findByToken(String token) {
         return queueJpaRepository.findByToken(token)
                 .map(QueueEntity::of);
     }
