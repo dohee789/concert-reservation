@@ -5,35 +5,37 @@ import kr.hhplus.concert.domain.exception.UserNotFoundException;
 import kr.hhplus.concert.domain.model.Wallet;
 import kr.hhplus.concert.domain.repository.WalletRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 
 @AllArgsConstructor
 public class WalletService {
-    private final WalletRepository paymentRepository;
+    private final WalletRepository walletRepository;
 
+    @Transactional(readOnly = true)
     public Wallet getBalance(Long userId) {
-        Wallet payment = paymentRepository.findByUserId(userId)
+        Wallet wallet = walletRepository.findByUserIdWithLock(userId)
                 .orElseGet(() -> Wallet.create(userId));
-        return payment;
+        return wallet;
     }
 
     public Wallet chargeBalance(Long userId, Float amount) {
-        Wallet payment = paymentRepository.findByUserId(userId)
+        Wallet wallet = walletRepository.findByUserIdWithLock(userId)
                 .orElseGet(() -> Wallet.create(userId));
 
-        payment.charge(amount);
-        return paymentRepository.save(payment);
+        wallet.charge(amount);
+        return walletRepository.save(wallet);
     }
 
-    public Wallet payBalance(Long userId, Float amount) {
-        Wallet payment = paymentRepository.findByUserId(userId)
+    public Wallet payMoney(Long userId, Float amount) {
+        Wallet wallet = walletRepository.findByUserIdWithLock(userId)
                 .orElseThrow(() -> new UserNotFoundException(userId));
 
-        if (payment.getBalance() < amount) {
-            throw new InSufficientBalanceException(payment.getBalance());
+        if (wallet.getBalance() < amount) {
+            throw new InSufficientBalanceException(wallet.getBalance());
         }
 
-        payment.pay(amount);
-        return paymentRepository.save(payment);
+        wallet.pay(amount);
+        return walletRepository.save(wallet);
     }
 
 }

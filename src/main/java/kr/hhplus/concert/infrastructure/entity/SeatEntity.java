@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import kr.hhplus.concert.domain.model.Seat;
 import kr.hhplus.concert.domain.model.enums.SeatStatus;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 @Table(name = "seat",
@@ -36,6 +37,7 @@ public class SeatEntity {
     private ConcertScheduleEntity concertSchedule;
 
     @Version
+    @ColumnDefault("0")
     private Long version;
 
     public static SeatEntity from(Seat seat) {

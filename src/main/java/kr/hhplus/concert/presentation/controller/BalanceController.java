@@ -9,7 +9,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import kr.hhplus.concert.domain.model.Wallet;
 import kr.hhplus.concert.domain.service.WalletService;
-import kr.hhplus.concert.presentation.dto.PaymentDTO;
+import kr.hhplus.concert.presentation.dto.WalletDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +34,7 @@ public class BalanceController {
     @PostMapping("/charge")
     public ResponseEntity<Wallet> chargeBalance(
             @RequestHeader("Token") String token,
-            @RequestBody @Valid PaymentDTO.PaymentRequest request
+            @RequestBody @Valid WalletDTO.PaymentRequest request
     ) {
         Wallet charge = paymentService.chargeBalance(request.userId(), request.balance());
         return ResponseEntity.ok(charge);

@@ -6,9 +6,9 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import kr.hhplus.concert.application.facade.PaymentFacade;
+import kr.hhplus.concert.application.facade.WalletFacade;
 import kr.hhplus.concert.domain.model.Wallet;
-import kr.hhplus.concert.presentation.dto.PaymentDTO;
+import kr.hhplus.concert.presentation.dto.WalletDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/payment")
 @RequiredArgsConstructor
-public class PaymentController {
+public class WalletController {
 
-    private final PaymentFacade paymentFacade;
+    private final WalletFacade walletFacade;
 
-    @Tag(name = "Payment", description = "결제 API")
+    @Tag(name = "Wallet", description = "결제 API")
     @Operation(summary = "잔액 충전", description = "콘서트를 결제합니다")
     @ApiResponse(responseCode = "200", description = "성공",
             content = @Content(
@@ -34,9 +34,9 @@ public class PaymentController {
     @PostMapping
     public ResponseEntity<Wallet> payment(
             @RequestHeader("Token") String token,
-            @RequestBody @Valid PaymentDTO.PaymentRequest request
+            @RequestBody @Valid WalletDTO.PaymentRequest request
     ) {
-        Wallet payment = paymentFacade.payment(request.userId(), request.amount());
+        Wallet payment = walletFacade.wallet(request.userId());
         return ResponseEntity.ok(payment);
     }
 }

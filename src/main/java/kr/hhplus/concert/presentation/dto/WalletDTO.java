@@ -5,7 +5,7 @@ import lombok.Builder;
 
 import java.time.LocalDateTime;
 
-public class PaymentDTO {
+public class WalletDTO {
 
     @Builder
     public record PaymentRequest (
