@@ -1,6 +1,7 @@
 package kr.hhplus.concert.domain.model;
 
 import kr.hhplus.concert.domain.model.enums.QueueStatus;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
+@AllArgsConstructor
 @Getter
 @Builder
 @RequiredArgsConstructor

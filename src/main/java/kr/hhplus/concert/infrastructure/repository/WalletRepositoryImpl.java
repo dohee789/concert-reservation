@@ -20,6 +20,12 @@ public class WalletRepositoryImpl implements WalletRepository {
     }
 
     @Override
+    public Optional<Wallet> findByUserId(Long userId) {
+        return walletJpaRepository.findById(userId)
+                .map(WalletEntity::of);
+    }
+
+    @Override
     @Transactional
     public Wallet save(Wallet wallet) {
         WalletEntity walletEntity = walletJpaRepository.save(WalletEntity.from(wallet));

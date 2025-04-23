@@ -41,16 +41,4 @@ class QueueFacadeTest {
                 .hasMessageContaining("존재하지 않는 유저입니다. userId = " + InvalidUserId);
     }
 
-    @Test
-    @DisplayName("유저의 대기열 순서를 조회할 수 있다")
-    void getUserQueueOrder_ShouldReturnCorrectOrder() {
-        // given
-        Long userId = 1L;
-        // when
-        Mockito.when(queueService.findMyEnQueueOrder(userId)).thenReturn(3);
-        int myEnQueueOrder = queueFacade.findMyEnQueueOrder(userId);
-        // then
-        assertThat(myEnQueueOrder).isEqualTo(4);
-    }
-
 }

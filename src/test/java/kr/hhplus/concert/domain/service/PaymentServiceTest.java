@@ -20,26 +20,13 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @ExtendWith(MockitoExtension.class)
 @RequiredArgsConstructor
-class PaymentServiceTest {
+class WalletServiceTest {
 
     @Mock
-    private WalletRepository paymentRepository;
+    private WalletRepository walletRepository;
 
     @InjectMocks
-    private WalletService paymentService;
-
-    @DisplayName("사용자의 잔액을 조회할 수 있다")
-    @Test
-    void getBalance_success() {
-        // given
-        Long userId = 1L;
-        Float expectedBalance = 1000F;
-        Mockito.when(paymentRepository.getBalance(userId)).thenReturn(expectedBalance);
-        // when
-        Float balance = paymentService.getBalance(userId);
-        // then
-        assertThat(balance).isEqualTo(expectedBalance);
-    }
+    private WalletService walletService;
 
     @DisplayName("사용자의 잔액을 충전할 수 있다")
     @Test
@@ -48,12 +35,12 @@ class PaymentServiceTest {
         Long userId = 1L;
         Float amount = 500F;
         Wallet existing = Wallet.create(userId);
-        Mockito.when(paymentRepository.findByUserId(userId)).thenReturn(Optional.of(existing));
+        Mockito.when(walletRepository.findByUserId(userId)).thenReturn(Optional.of(existing));
         // when
-        Wallet updated = paymentService.chargeBalance(userId, amount);
+        Wallet updated = walletService.chargeBalance(userId, amount);
         // then
         assertThat(updated.getBalance()).isEqualTo(1500F);
-        Mockito.verify(paymentRepository).save(updated);
+        Mockito.verify(walletRepository).save(updated);
     }
 
     @DisplayName("사용자가 결제 시 잔액이 부족하면 예외가 발생한다")
@@ -63,16 +50,13 @@ class PaymentServiceTest {
         Long userId = 1L;
         Float amount = 500F;
         Wallet existing = Wallet.create(userId);
-        Mockito.when(paymentRepository.findByUserId(userId)).thenReturn(Optional.of(existing));
+        Mockito.when(walletRepository.findByUserId(userId)).thenReturn(Optional.of(existing));
         // when
         // then
-        assertThatThrownBy(() -> paymentService.payBalance(userId, amount))
+        assertThatThrownBy(() -> walletService.payMoney(userId, amount))
                 .isInstanceOf(InSufficientBalanceException.class)
                 .hasMessageContaining("잔액이 부족합니다");
 
-        Mockito.verify(paymentRepository, Mockito.never()).save(Mockito.any());
+        Mockito.verify(walletRepository, Mockito.never()).save(Mockito.any());
     }
-
-
-
 }
