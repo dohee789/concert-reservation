@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -42,5 +43,8 @@ public class QueueService {
         return queue;
     }
 
-
+    public Queue findByToken(UUID token) {
+        return queueRepository.findByToken(token)
+                .orElseThrow(() -> new NoSuchElementException("해당 토큰에 해당하는 큐가 존재하지 않습니다."));
+    }
 }

@@ -52,5 +52,12 @@ public class QueueRepositoryImpl implements QueueRepository {
                 .map(QueueEntity::of)
                 .toList();
     }
+
+    @Override
+    public Optional<Queue> findByToken(UUID token) {
+        return queueJpaRepository.findByToken(token)
+                .map(QueueEntity::of);
+    }
+
 }
 
