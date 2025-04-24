@@ -1,6 +1,6 @@
 package kr.hhplus.concert.domain.model.enums;
 
-public enum PaymentType {
+public enum WalletType {
     PAYMENT,
     CHARGE
 }

@@ -2,7 +2,7 @@ package kr.hhplus.concert.infrastructure.entity;
 
 import jakarta.persistence.*;
 import kr.hhplus.concert.domain.model.Wallet;
-import kr.hhplus.concert.domain.model.enums.PaymentType;
+import kr.hhplus.concert.domain.model.enums.WalletType;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -30,7 +30,7 @@ public class WalletEntity {
     private Float balance;
 
     @Enumerated(EnumType.STRING)
-    private PaymentType paymentType;
+    private WalletType walletType;
 
     private LocalDateTime processedAt;
 
@@ -39,7 +39,7 @@ public class WalletEntity {
                 .id(wallet.getId())
                 .user(UserEntity.builder().id(wallet.getUserId()).build())
                 .balance(wallet.getBalance())
-                .paymentType(wallet.getPaymentType())
+                .walletType(wallet.getWalletType())
                 .processedAt(wallet.getProcessedAt())
                 .build();
     }
@@ -49,7 +49,7 @@ public class WalletEntity {
                 .id(this.id)
                 .userId(this.user.getId())
                 .balance(this.balance)
-                .paymentType(this.paymentType)
+                .walletType(this.walletType)
                 .processedAt(this.processedAt)
                 .build();
     }

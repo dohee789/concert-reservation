@@ -28,7 +28,7 @@ class ReservationFacadeTest {
     private ReservationFacade reservationFacade;
 
     @Test
-    void preventSeatDuplication_WithOptimisticLock_OnConcurrentReservation() throws InterruptedException {
+    void seatReservationConcurrencyControl_With_OptimisticLock() throws InterruptedException {
         int threadCount = 5;
         ExecutorService service = Executors.newFixedThreadPool(threadCount);
         CountDownLatch latch = new CountDownLatch(threadCount);

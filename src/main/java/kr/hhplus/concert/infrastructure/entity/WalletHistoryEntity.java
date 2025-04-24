@@ -34,7 +34,7 @@ public class WalletHistoryEntity {
                 .userId(this.wallet.getId())
                 .balance(this.wallet.getBalance())
                 .processedAt(this.wallet.getProcessedAt())
-                .paymentType(this.wallet.getPaymentType())
+                .paymentType(this.wallet.getWalletType())
                 .build();
     }
 }
