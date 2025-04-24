@@ -1,6 +1,7 @@
 package kr.hhplus.concert.infrastructure.entity;
 
 import jakarta.persistence.*;
+import kr.hhplus.concert.domain.model.Queue;
 import kr.hhplus.concert.domain.model.Reservation;
 import lombok.*;
 
@@ -46,7 +47,8 @@ public class ReservationEntity {
     public Reservation of() {
         return Reservation.builder()
                 .id(this.id)
-                .userId(this.user.getId())
+                .queue(Queue.builder()
+                .userId(this.user.getId()).build())
                 .seat(this.seat.of())
                 .reservedAt(this.seat.getConcertSchedule().getScheduleDateTime())
                 .build();

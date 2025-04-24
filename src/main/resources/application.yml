@@ -31,7 +31,6 @@ spring:
     password: application
     initialization-mode: always
     sql-script-encoding: UTF-8
-    data: classpath:db.init
 
 ---
 springdoc:

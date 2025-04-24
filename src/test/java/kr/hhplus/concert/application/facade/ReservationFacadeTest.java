@@ -2,10 +2,6 @@ package kr.hhplus.concert.application.facade;
 
 import kr.hhplus.concert.application.dto.ReservationCommand;
 import kr.hhplus.concert.application.dto.ReservationResult;
-import kr.hhplus.concert.domain.service.QueueService;
-import kr.hhplus.concert.domain.service.ReservationService;
-import kr.hhplus.concert.domain.service.SeatService;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,7 +9,6 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.testcontainers.junit.jupiter.Testcontainers;
-import org.testcontainers.utility.TestcontainersConfiguration;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -33,7 +28,7 @@ class ReservationFacadeTest {
     private ReservationFacade reservationFacade;
 
     @Test
-    void 동시에_예약요청시_낙관적락_적용되면_동시성을_제어하여_좌석선점중복_방지함() throws InterruptedException {
+    void preventSeatDuplication_WithOptimisticLock_OnConcurrentReservation() throws InterruptedException {
         int threadCount = 5;
         ExecutorService service = Executors.newFixedThreadPool(threadCount);
         CountDownLatch latch = new CountDownLatch(threadCount);
