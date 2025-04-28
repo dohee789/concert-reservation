@@ -6,8 +6,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-@Getter
 @AllArgsConstructor
+@Getter
 @RequiredArgsConstructor
 @Builder
 public class Seat {
@@ -18,6 +18,8 @@ public class Seat {
     private Float price;
 
     private SeatStatus seatStatus;
+
+    private Long version;
 
     public void reserve(){
         this.seatStatus = seatStatus.RESERVED;

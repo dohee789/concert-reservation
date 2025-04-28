@@ -8,7 +8,12 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "queue")
+@Table(name = "queue",
+        indexes = {
+                @Index(name = "idx_queue_user_id",  columnList="user_id", unique = true),
+                @Index(name = "idx_queue_token",  columnList="token", unique = true),
+                @Index(name = "idx_queue_queue_status",  columnList="queue_status")
+})
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor

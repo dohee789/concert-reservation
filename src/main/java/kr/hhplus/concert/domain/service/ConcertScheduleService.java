@@ -2,11 +2,15 @@ package kr.hhplus.concert.domain.service;
 
 import kr.hhplus.concert.domain.model.ConcertSchedule;
 import kr.hhplus.concert.domain.repository.ConcertScheduleRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+@Service
+@RequiredArgsConstructor
 public class ConcertScheduleService {
     private ConcertScheduleRepository concertScheduleRepository;
 

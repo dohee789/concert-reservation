@@ -1,15 +1,15 @@
 package kr.hhplus.concert.domain.service;
 
-import kr.hhplus.concert.domain.model.ConcertSchedule;
 import kr.hhplus.concert.domain.model.Queue;
 import kr.hhplus.concert.domain.model.Reservation;
 import kr.hhplus.concert.domain.model.Seat;
 import kr.hhplus.concert.domain.repository.ReservationRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
+@Service
 @RequiredArgsConstructor
 public class ReservationService {
     private final ReservationRepository reservationRepository;

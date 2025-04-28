@@ -4,7 +4,9 @@ import kr.hhplus.concert.domain.model.Queue;
 import kr.hhplus.concert.domain.service.QueueService;
 import kr.hhplus.concert.domain.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
+@Service
 @RequiredArgsConstructor
 public class QueueFacade {
     private final QueueService queueService;

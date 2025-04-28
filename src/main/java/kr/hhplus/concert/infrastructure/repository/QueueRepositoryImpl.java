@@ -4,6 +4,7 @@ import kr.hhplus.concert.domain.model.Queue;
 import kr.hhplus.concert.domain.model.enums.QueueStatus;
 import kr.hhplus.concert.domain.repository.QueueRepository;
 import kr.hhplus.concert.infrastructure.entity.QueueEntity;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import java.util.*;

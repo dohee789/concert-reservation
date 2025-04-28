@@ -4,6 +4,7 @@ import kr.hhplus.concert.domain.model.ConcertSchedule;
 import kr.hhplus.concert.domain.repository.ConcertScheduleRepository;
 import kr.hhplus.concert.infrastructure.entity.ConcertScheduleEntity;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 

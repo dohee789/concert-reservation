@@ -4,9 +4,14 @@ import jakarta.persistence.*;
 import kr.hhplus.concert.domain.model.Seat;
 import kr.hhplus.concert.domain.model.enums.SeatStatus;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 @Entity
-@Table(name = "seat")
+@Table(name = "seat",
+        indexes = {
+        @Index(name = "idx_concert_schedule_id",  columnList="concert_schedule_id"),
+        @Index(name = "idx_seat_status",  columnList="seat_status")},
+        uniqueConstraints = @UniqueConstraint(name = "unique_seat_number", columnNames = {"concert_schedule_id", "seat_number"}))
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
@@ -31,6 +36,10 @@ public class SeatEntity {
     @JoinColumn(name = "concert_schedule_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private ConcertScheduleEntity concertSchedule;
 
+    @Version
+    @ColumnDefault("0")
+    private Long version;
+
     public static SeatEntity from(Seat seat) {
         return SeatEntity.builder()
                 .id(seat.getId())
@@ -38,6 +47,7 @@ public class SeatEntity {
                 .price(seat.getPrice())
                 .seatStatus(seat.getSeatStatus())
                 .concertSchedule(ConcertScheduleEntity.from(seat.getConcertSchedule()))
+                .version(seat.getVersion())
                 .build();
     }
 
@@ -48,6 +58,7 @@ public class SeatEntity {
                 .seatNumber(this.seatNumber)
                 .price(this.price)
                 .seatStatus(this.seatStatus)
+                .version(this.version)
                 .build();
     }
 }

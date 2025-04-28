@@ -1,20 +1,19 @@
 package kr.hhplus.concert.domain.model;
 
 import kr.hhplus.concert.domain.model.enums.SeatStatus;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;
 
+@AllArgsConstructor
 @Getter
-@RequiredArgsConstructor
 @Builder
 public class Reservation {
-
     private final Queue queue;
     private final Seat seat;
-
     private Long id;
     private Long userId;
     private LocalDateTime reservedAt;
@@ -31,9 +30,11 @@ public class Reservation {
         queue.pending();
 
         return Reservation.builder()
-                .userId(queue.getUserId())
+                .queue(queue)
                 .seat(seat)
+                .userId(queue.getUserId())
                 .reservedAt(LocalDateTime.now())
                 .build();
     }
 }
+

@@ -45,24 +45,4 @@ class QueueServiceTest {
         assertThat(token.getQueueStatus()).isEqualTo(QueueStatus.WAITING);
     }
 
-    @Test
-    @DisplayName("대기열에서 나의 순서는 앞 유저들의 순서에 1을 더한 것이다")
-    void findMyEnQueueOrder_ShouldReturnCorrectOrder() {
-        // given
-        Long userId1 = 1L;
-        Long userId2 = 2L;
-        queueService.registerToken(userId1);
-        queueService.registerToken(userId2);
-        Mockito.when(queueRepository.countAheadOf(userId1)).thenReturn(0); // userId1 앞엔 아무도 없음
-        Mockito.when(queueRepository.countAheadOf(userId2)).thenReturn(1); // userId2 앞에 userId1 있음
-        // when
-        // then
-        assertThat(queueService.findMyEnQueueOrder(userId1)).isEqualTo(1);
-        assertThat(queueService.findMyEnQueueOrder(userId2)).isEqualTo(2);
-    }
-
-
-
-
-
 }

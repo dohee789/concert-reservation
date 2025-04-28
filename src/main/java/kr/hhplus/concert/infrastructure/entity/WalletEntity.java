@@ -1,20 +1,24 @@
 package kr.hhplus.concert.infrastructure.entity;
 
 import jakarta.persistence.*;
-import kr.hhplus.concert.domain.model.Payment;
+import kr.hhplus.concert.domain.model.Wallet;
 import kr.hhplus.concert.domain.model.enums.PaymentType;
 import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "payment")
+@Table(name = "wallet",
+        indexes = {
+                @Index(name = "idx_user_id",  columnList="user_id", unique = true),
+                @Index(name = "idx_processed_at",  columnList="processed_at")
+        })
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
 
-public class PaymentEntity {
+public class WalletEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -30,18 +34,18 @@ public class PaymentEntity {
 
     private LocalDateTime processedAt;
 
-    public static PaymentEntity from(Payment payment) {
-        return PaymentEntity.builder()
-                .id(payment.getId())
-                .user(UserEntity.builder().id(payment.getUserId()).build())
-                .balance(payment.getBalance())
-                .paymentType(payment.getPaymentType())
-                .processedAt(payment.getProcessedAt())
+    public static WalletEntity from(Wallet wallet) {
+        return WalletEntity.builder()
+                .id(wallet.getId())
+                .user(UserEntity.builder().id(wallet.getUserId()).build())
+                .balance(wallet.getBalance())
+                .paymentType(wallet.getPaymentType())
+                .processedAt(wallet.getProcessedAt())
                 .build();
     }
 
-    public Payment of() {
-        return Payment.builder()
+    public Wallet of() {
+        return Wallet.builder()
                 .id(this.id)
                 .userId(this.user.getId())
                 .balance(this.balance)

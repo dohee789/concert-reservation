@@ -12,6 +12,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -31,13 +32,13 @@ class ConcertServiceTest {
         Long concertId = 1L;
         Concert concert = new Concert(concertId, "콘서트입니다", "콘서트라구요");
         // when
-        Mockito.when(concertRepository.findById(concertId)).thenReturn(concert);
+        Mockito.when(concertRepository.findById(concertId)).thenReturn(Optional.of(concert));
         Concert result = concertService.findConcertById(concertId);
         // then
         assertThat(result).isNotNull();
         assertThat(result.id()).isEqualTo(concertId);
         assertThat(result.name()).isEqualTo("콘서트입니다");
-        assertThat(result.description()).isEqualTo("콘서트라구요");
+        assertThat(result.venue()).isEqualTo("콘서트라구요");
     }
 
 }
