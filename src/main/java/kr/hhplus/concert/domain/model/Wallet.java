@@ -1,6 +1,6 @@
 package kr.hhplus.concert.domain.model;
 
-import kr.hhplus.concert.domain.model.enums.PaymentType;
+import kr.hhplus.concert.domain.model.enums.WalletType;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -15,7 +15,7 @@ public class Wallet {
     private Float balance;
     private LocalDateTime processedAt;
 
-    private PaymentType paymentType;
+    private WalletType walletType;
 
     public static Wallet create(Long userId) {
         return Wallet.builder()
@@ -28,12 +28,12 @@ public class Wallet {
     public void charge(Float amount) {
         this.balance += amount;
         this.processedAt = LocalDateTime.now();
-        this.paymentType = paymentType.CHARGE;
+        this.walletType = walletType.CHARGE;
     }
 
     public void pay(Float amount) {
         this.balance -= amount;
         this.processedAt = LocalDateTime.now();
-        this.paymentType = paymentType.PAYMENT;
+        this.walletType = walletType.PAYMENT;
     }
 }

@@ -19,7 +19,7 @@ public class ConcertService {
     }
 
     public List<Concert> findAllConcerts() {
-        return findAllConcerts();
+        return concertRepository.findAllConcerts();
     }
 
 }

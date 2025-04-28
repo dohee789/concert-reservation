@@ -6,7 +6,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 import java.util.List;
 
-public class QueueTokenExpireScheduler {
+public class TokenExpireScheduler {
+
     private QueueRepository queueRepository;
 
     @Scheduled(fixedDelay = 5000*60)

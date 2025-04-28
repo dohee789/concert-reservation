@@ -5,7 +5,6 @@ import kr.hhplus.concert.domain.model.ConcertSchedule;
 import kr.hhplus.concert.domain.service.ConcertScheduleService;
 import kr.hhplus.concert.domain.service.ConcertService;
 import kr.hhplus.concert.domain.service.QueueService;
-import kr.hhplus.concert.domain.service.SeatService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +16,6 @@ public class ConcertFacade {
     private QueueService queueService;
     private ConcertService concertService;
     private ConcertScheduleService concertScheduleService;
-    private SeatService seatService;
 
     public ConcertSchedule findSchedules(Long userId, Long id, LocalDateTime scheduleDate) {
         // 토큰 검증

@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
+@Repository
 @RequiredArgsConstructor
 public class WalletRepositoryImpl implements WalletRepository {
 

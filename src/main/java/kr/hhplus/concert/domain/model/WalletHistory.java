@@ -1,6 +1,6 @@
 package kr.hhplus.concert.domain.model;
 
-import kr.hhplus.concert.domain.model.enums.PaymentType;
+import kr.hhplus.concert.domain.model.enums.WalletType;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -16,14 +16,14 @@ public class WalletHistory {
     private Float balance;
     private LocalDateTime processedAt;
 
-    private PaymentType paymentType;
+    private WalletType paymentType;
 
     public static WalletHistory create(Wallet wallet) {
         return WalletHistory.builder()
                 .userId(wallet.getUserId())
                 .balance(wallet.getBalance())
                 .processedAt(wallet.getProcessedAt())
-                .paymentType(wallet.getPaymentType())
+                .paymentType(wallet.getWalletType())
                 .build();
     }
 }

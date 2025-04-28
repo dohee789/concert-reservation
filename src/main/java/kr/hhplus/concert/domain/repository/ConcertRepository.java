@@ -10,5 +10,5 @@ public interface ConcertRepository {
 
     Concert save(Concert concert);
 
-    List<Concert> concertList();
+    List<Concert> findAllConcerts();
 }
