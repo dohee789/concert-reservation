@@ -1,5 +1,6 @@
 package kr.hhplus.concert.domain.service;
 
+import kr.hhplus.concert.domain.exception.SeatUnavailableException;
 import kr.hhplus.concert.domain.model.Queue;
 import kr.hhplus.concert.domain.model.Reservation;
 import kr.hhplus.concert.domain.model.Seat;
@@ -15,8 +16,13 @@ public class ReservationService {
     private final ReservationRepository reservationRepository;
 
     public Reservation makeReservation(Queue queue, Seat seat) {
-        Reservation reservation = Reservation.create(queue, seat);
-        return reservationRepository.save(reservation);
+        try {
+            Reservation reservation = Reservation.create(queue, seat);
+            return reservationRepository.save(reservation);
+        } catch (IllegalStateException e){
+            seat.withhold();
+            throw new SeatUnavailableException(seat.getSeatStatus());
+        }
     }
 
     public Reservation getReservation(Long userId) {

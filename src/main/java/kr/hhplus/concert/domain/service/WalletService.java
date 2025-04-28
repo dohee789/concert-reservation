@@ -20,6 +20,7 @@ public class WalletService {
         return wallet;
     }
 
+    @Transactional
     public Wallet chargeBalance(Long userId, Float amount) {
         Wallet wallet = walletRepository.findByUserIdWithLock(userId)
                 .orElseGet(() -> Wallet.create(userId));
@@ -28,6 +29,7 @@ public class WalletService {
         return walletRepository.save(wallet);
     }
 
+    @Transactional
     public Wallet payMoney(Long userId, Float amount) {
         Wallet wallet = walletRepository.findByUserIdWithLock(userId)
                 .orElseThrow(() -> new UserNotFoundException(userId));
