@@ -2,6 +2,7 @@ package kr.hhplus.concert.domain.service;
 
 import kr.hhplus.concert.domain.exception.InSufficientBalanceException;
 import kr.hhplus.concert.domain.exception.UserNotFoundException;
+import kr.hhplus.concert.domain.model.Reservation;
 import kr.hhplus.concert.domain.model.Wallet;
 import kr.hhplus.concert.domain.repository.WalletRepository;
 import lombok.AllArgsConstructor;
@@ -30,15 +31,15 @@ public class WalletService {
     }
 
     @Transactional
-    public Wallet payMoney(Long userId, Float amount) {
-        Wallet wallet = walletRepository.findByUserIdWithLock(userId)
-                .orElseThrow(() -> new UserNotFoundException(userId));
+    public Wallet payMoney(Reservation reservation, Float amount) {
+        Wallet wallet = walletRepository.findByUserIdWithLock(reservation.getQueue().getUserId())
+                .orElseThrow(() -> new UserNotFoundException(reservation.getQueue().getUserId()));
 
         if (wallet.getBalance() < amount) {
             throw new InSufficientBalanceException(wallet.getBalance());
         }
 
-        wallet.pay(amount);
+        wallet.pay(reservation, amount);
         return walletRepository.save(wallet);
     }
 
