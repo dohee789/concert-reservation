@@ -5,14 +5,14 @@ CREATE TABLE IF NOT EXISTS `user` (
 );
 
 -- 2. Concert 테이블 생성
-CREATE TABLE `concert` (
+CREATE TABLE IF NOT EXISTS `concert` (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     venue VARCHAR(255) NOT NULL
 );
 
 -- 3. ConcertSchedule 테이블 생성 (concert_id를 참조하므로 concert 테이블이 먼저 생성되어야 합니다.)
-CREATE TABLE `concert_schedule` (
+CREATE TABLE IF NOT EXISTS `concert_schedule` (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     concert_id BIGINT NOT NULL,
     schedule_date_time TIMESTAMP NOT NULL,
@@ -20,7 +20,7 @@ CREATE TABLE `concert_schedule` (
 );
 
 -- 4. Seat 테이블 생성 (concert_schedule_id를 참조하므로 concert_schedule 테이블이 먼저 생성되어야 합니다.)
-CREATE TABLE `seat` (
+CREATE TABLE IF NOT EXISTS `seat` (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     seat_number BIGINT NOT NULL,
     price FLOAT NOT NULL,
@@ -34,7 +34,7 @@ CREATE TABLE `seat` (
 );
 
 -- 5. Queue 테이블 생성 (user_id를 참조하므로 user 테이블이 먼저 생성되어야 합니다.)
-CREATE TABLE `queue` (
+CREATE TABLE IF NOT EXISTS `queue` (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     user_id BIGINT NOT NULL,
     token VARCHAR(255) NOT NULL UNIQUE,
@@ -49,7 +49,7 @@ CREATE TABLE `queue` (
 );
 
 -- 6. Reservation 테이블 생성 (seat_id, user_id를 참조하므로 seat와 user 테이블이 먼저 생성되어야 합니다.)
-CREATE TABLE `reservation` (
+CREATE TABLE IF NOT EXISTS `reservation` (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     seat_id BIGINT NOT NULL,
     user_id BIGINT NOT NULL,
@@ -62,7 +62,7 @@ CREATE TABLE `reservation` (
 );
 
 -- 7. Wallet 테이블 생성 (user_id를 참조하므로 user 테이블이 먼저 생성되어야 합니다.)
-CREATE TABLE `wallet` (
+CREATE TABLE IF NOT EXISTS `wallet` (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     user_id BIGINT NOT NULL,
     balance FLOAT,
@@ -74,7 +74,7 @@ CREATE TABLE `wallet` (
 );
 
 -- 8. WalletHistory
-CREATE TABLE wallet_history (
+CREATE TABLE IF NOT EXISTS `wallet_history` (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     wallet_id BIGINT NOT NULL,
     CONSTRAINT fk_wallet_history_wallet_id FOREIGN KEY (wallet_id)
@@ -86,7 +86,7 @@ CREATE TABLE wallet_history (
 INSERT INTO concert (name, venue) VALUES ('WORLD DJ FESTIVAL', '서울랜드'),
                                          ('Ultra Music Festival', '잠실 종합운동장');
 
-INSERT INTO concert_schedule (concert_id, schedule_date_time) VALUES ((SELECT id FROM concert WHERE id = 1), CURRENT_TIMESTAMP),
+INSERT INTO concert_schedule (concert_id, schedule_date_time) VALUES ((SELECT id FROM concert WHERE id = 1), '2025-05-05 20:00:00'),
                                                                     ((SELECT id FROM concert WHERE id = 2), CURRENT_TIMESTAMP);
 
 INSERT INTO user (name) VALUES ('가'),('나'),('다'),('라'),('마');
