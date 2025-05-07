@@ -20,7 +20,7 @@ public class ReservationService {
             Reservation reservation = Reservation.create(queue, seat);
             return reservationRepository.save(reservation);
         } catch (IllegalStateException e){
-            seat.withhold();
+            seat.notAssigned();
             throw new SeatUnavailableException(seat.getSeatStatus());
         }
     }

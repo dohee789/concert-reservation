@@ -21,11 +21,15 @@ public class Seat {
 
     private Long version;
 
-    public void reserve(){
+    public void reserved(){
         this.seatStatus = seatStatus.RESERVED;
     }
 
-    public void withhold(){
+    public void notAssigned(){
         this.seatStatus = seatStatus.AVAILABLE;
+    }
+
+    public void pending(){
+        this.seatStatus = seatStatus.PENDING;
     }
 }
