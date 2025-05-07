@@ -26,7 +26,7 @@ public class Reservation {
             throw new IllegalStateException("해당 좌석은 예약할 수 없습니다.");
         }
 
-        seat.reserve();
+        seat.pending();
         queue.pending();
 
         return Reservation.builder()

@@ -2,6 +2,7 @@ package kr.hhplus.concert.application.facade;
 
 import kr.hhplus.concert.application.dto.ReservationCommand;
 import kr.hhplus.concert.application.dto.ReservationResult;
+import kr.hhplus.concert.application.lock.DistributeLock;
 import kr.hhplus.concert.domain.exception.ConcurrencyReservationException;
 import kr.hhplus.concert.domain.model.Queue;
 import kr.hhplus.concert.domain.model.Reservation;
@@ -25,6 +26,7 @@ public class ReservationFacade {
     @Autowired
     private ReservationService reservationService;
 
+    @DistributeLock(key = "'assign seat:' + #command.seatId", waitTime = 5, leaseTime = 5)
     @Transactional
     public ReservationResult makeReservation(ReservationCommand command) {
         try {
