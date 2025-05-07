@@ -28,13 +28,13 @@ class ReservationFacadeTest {
     private ReservationFacade reservationFacade;
 
     @Test
-    void seatReservationConcurrencyControl_With_OptimisticLock() throws InterruptedException {
-        int threadCount = 5;
+    void seatReservationConcurrencyControl_With_OptimisticLockAndDistributeLock() throws InterruptedException {
+        int threadCount = 1000;
         ExecutorService service = Executors.newFixedThreadPool(threadCount);
         CountDownLatch latch = new CountDownLatch(threadCount);
         AtomicInteger successCount = new AtomicInteger();
 
-        for(int i=0; i< threadCount;i++) {
+        for(int i=1; i < threadCount+1; i++) {
             int userId = i;
             service.submit(() -> {
                 ReservationCommand command = ReservationCommand.builder()
@@ -57,7 +57,6 @@ class ReservationFacadeTest {
 
         latch.await();
         service.shutdown();
-        assertEquals(1, successCount.get());
+        assertEquals(5, successCount.get());
     }
-
 }

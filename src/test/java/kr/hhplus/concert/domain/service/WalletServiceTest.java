@@ -2,6 +2,7 @@ package kr.hhplus.concert.domain.service;
 
 
 import kr.hhplus.concert.domain.exception.InSufficientBalanceException;
+import kr.hhplus.concert.domain.model.Reservation;
 import kr.hhplus.concert.domain.model.Wallet;
 import kr.hhplus.concert.domain.repository.WalletRepository;
 import lombok.RequiredArgsConstructor;
@@ -49,11 +50,12 @@ class WalletServiceTest {
         // given
         Long userId = 1L;
         Float amount = 500F;
+        Reservation reservation = Reservation.builder().build();
         Wallet existing = Wallet.create(userId);
         Mockito.when(walletRepository.findByUserId(userId)).thenReturn(Optional.of(existing));
         // when
         // then
-        assertThatThrownBy(() -> walletService.payMoney(userId, amount))
+        assertThatThrownBy(() -> walletService.payMoney(reservation, amount))
                 .isInstanceOf(InSufficientBalanceException.class)
                 .hasMessageContaining("잔액이 부족합니다");
 

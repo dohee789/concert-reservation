@@ -35,6 +35,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 
+	// Lombok
 	implementation ("org.projectlombok:lombok:1.18.20")
 	annotationProcessor ("org.projectlombok:lombok:1.18.20")
 
@@ -43,6 +44,11 @@ dependencies {
 
 	// Swagger
 	implementation ("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
+
+	// Redis
+	implementation ("org.springframework.boot:spring-boot-starter-data-redis")
+	implementation ("org.redisson:redisson-spring-boot-starter:3.28.0")
+	implementation ("org.springframework.boot:spring-boot-starter-aop")
 
     // Test
     testImplementation("org.springframework.boot:spring-boot-starter-test")

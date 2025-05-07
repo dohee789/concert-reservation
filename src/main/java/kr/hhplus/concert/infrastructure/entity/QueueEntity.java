@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import kr.hhplus.concert.domain.model.Queue;
 import kr.hhplus.concert.domain.model.enums.QueueStatus;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDateTime;
 
@@ -38,6 +39,10 @@ public class QueueEntity {
     private LocalDateTime expiredAt;
     private LocalDateTime enteredAt;
 
+    @Version
+    @ColumnDefault("0")
+    private Long version;
+
     public static QueueEntity from(Queue queue) {
         return QueueEntity.builder()
                 .id(queue.getId())
@@ -46,6 +51,7 @@ public class QueueEntity {
                 .queueStatus(queue.getQueueStatus())
                 .expiredAt(queue.getExpiredAt())
                 .enteredAt(queue.getEnteredAt())
+                .version(queue.getVersion())
                 .build();
     }
 
@@ -57,6 +63,7 @@ public class QueueEntity {
                 .queueStatus(this.queueStatus)
                 .expiredAt(this.expiredAt)
                 .enteredAt(this.enteredAt)
+                .version(this.getVersion())
                 .build();
     }
 }

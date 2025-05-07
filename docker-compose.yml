@@ -12,6 +12,13 @@ services:
     volumes:
       - ./data/mysql/:/var/lib/mysql
 
+# docker exec -it redis-lock redis-cli 접속 후 ping 으로 확인
+  redis:
+    image: redis:7
+    container_name: redis-lock
+    ports:
+      - "6379:6379"
+
 networks:
   default:
     driver: bridge
