@@ -1,6 +1,9 @@
 package kr.hhplus.concert;
 
 import jakarta.annotation.PreDestroy;
+import org.redisson.Redisson;
+import org.redisson.api.RedissonClient;
+import org.redisson.config.Config;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.context.annotation.Bean;
@@ -30,5 +33,15 @@ public class TestcontainersConfiguration {
 		if (MYSQL_CONTAINER.isRunning()) {
 			MYSQL_CONTAINER.stop();
 		}
+	}
+
+	@Bean
+	public RedissonClient redissonClient() {
+		Config config = new Config();
+		config.useSingleServer()
+				.setAddress("redis://localhost:6379")
+				.setConnectionMinimumIdleSize(1)
+				.setConnectionPoolSize(2);
+		return Redisson.create(config);
 	}
 }
