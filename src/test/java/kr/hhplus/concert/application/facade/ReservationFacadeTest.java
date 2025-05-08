@@ -39,7 +39,6 @@ class ReservationFacadeTest {
             service.submit(() -> {
                 ReservationCommand command = ReservationCommand.builder()
                         .userId((long)userId)
-                        .concertId(10L)
                         .concertScheduleId(1L)
                         .seatId(1L)
                         .build();

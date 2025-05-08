@@ -1,11 +1,9 @@
 package kr.hhplus.concert.domain.model;
 
 import kr.hhplus.concert.domain.model.enums.SeatStatus;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
+@NoArgsConstructor(force = true)
 @AllArgsConstructor
 @Getter
 @RequiredArgsConstructor
