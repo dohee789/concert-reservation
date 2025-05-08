@@ -3,6 +3,7 @@ package kr.hhplus.concert.domain.service;
 import kr.hhplus.concert.TestcontainersConfiguration;
 import kr.hhplus.concert.domain.model.Concert;
 import kr.hhplus.concert.domain.model.ConcertSchedule;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -33,12 +34,16 @@ class ConcertCacheTest {
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
 
+    @BeforeEach
+    void setUp() {
+        redisTemplate.getConnectionFactory().getConnection().flushAll();
+    }
+
     @Test
-    void Can_Select_Cached_Concert() {
+    void canSelectCachedConcert() {
         // given
         Long concertId = 1L;
         String cacheKey = "concert::" + concertId;
-        redisTemplate.delete("concert:" + concertId);
 
         // when
         // 1차 조회 (DB 접근)
@@ -55,12 +60,11 @@ class ConcertCacheTest {
     }
 
     @Test
-    void Can_Select_Cached_ConcertSchedule() {
+    void canSelectCachedConcertSchedule() {
         // given
         Long concertId = 1L;
         LocalDateTime scheduleDate = LocalDateTime.of(2025, 5, 5, 20, 0,0);
         String cacheKey = "concertSchedule::" + concertId + ":" + scheduleDate.toLocalDate();
-        redisTemplate.delete(cacheKey);
 
         // when
         // 1차 조회 (DB 접근)
