@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 
 @Builder
 public record ReservationResult (
+    Long id,
     Long userId,
     String concertName,
     LocalDateTime concertScheduleDate,
@@ -16,6 +17,7 @@ public record ReservationResult (
 ) {
     public static ReservationResult from(Reservation reservation) {
         return ReservationResult.builder()
+                .id(reservation.getId())
                 .userId(reservation.getQueue().getUserId())
                 .concertName(reservation.getSeat().getConcertSchedule().concert().name())
                 .concertScheduleDate(reservation.getSeat().getConcertSchedule().scheduleDateTime())

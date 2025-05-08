@@ -21,11 +21,11 @@ public class WalletFacade {
 
     @DistributeLock(key = "'pay userId:' + #userId", waitTime = 5, leaseTime = 5)
     @Transactional
-    public Wallet wallet(Long userId) {
+    public Wallet wallet(Long userId, Long reservationId) {
         // 토큰 및 대기열 검증
         queueService.getValidatedQueue(userId);
         // 예약 조회
-        Reservation reservation = reservationService.getReservation(userId);
+        Reservation reservation = reservationService.getReservation(reservationId);
         // 좌석 조회
         Seat seat = seatService.findSeat(reservation.getSeat().getConcertSchedule().id());
         // 결제

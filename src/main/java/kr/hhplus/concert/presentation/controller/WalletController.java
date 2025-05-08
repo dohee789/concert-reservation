@@ -36,7 +36,7 @@ public class WalletController {
             @RequestHeader("Token") String token,
             @RequestBody @Valid WalletDTO.PaymentRequest request
     ) {
-        Wallet payment = walletFacade.wallet(request.userId());
+        Wallet payment = walletFacade.wallet(request.userId(), request.reservationId());
         return ResponseEntity.ok(payment);
     }
 }
