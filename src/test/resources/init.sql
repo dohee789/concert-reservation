@@ -100,17 +100,17 @@ VALUES ((SELECT id FROM user WHERE id = 1), 'abcd', 'ACTIVE', DATE_ADD(CURRENT_T
 
 INSERT INTO seat (seat_number, price, seat_status, concert_schedule_id)
 VALUES (1, 100.0, 'AVAILABLE', 1),
-       (2, 250.0, 'AVAILABLE', 1),
+       (2, 250.0, 'AVAILABLE', 2),
        (3, 100.0, 'AVAILABLE', 1),
        (4, 250.0, 'AVAILABLE', 1),
-       (5, 200.0, 'AVAILABLE', 1);
+       (5, 200.0, 'AVAILABLE', 2);
 
 INSERT INTO reservation (seat_id, user_id, reserved_at)
 VALUES (1, (SELECT id FROM user WHERE id = 1), CURRENT_TIMESTAMP);
 
 INSERT INTO wallet (user_id, balance, wallet_type, processed_at)
 VALUES ((SELECT id FROM user WHERE id = 1), 100.0, 'PAYMENT', CURRENT_TIMESTAMP),
-        ((SELECT id FROM user WHERE id = 2), 100.0, 'CHARGE', CURRENT_TIMESTAMP),
+        ((SELECT id FROM user WHERE id = 2), 300.0, 'CHARGE', CURRENT_TIMESTAMP),
         ((SELECT id FROM user WHERE id = 3), 100.0, 'CHARGE', CURRENT_TIMESTAMP),
         ((SELECT id FROM user WHERE id = 4), 100.0, 'CHARGE', CURRENT_TIMESTAMP),
         ((SELECT id FROM user WHERE id = 5), 100.0, 'CHARGE', CURRENT_TIMESTAMP);
