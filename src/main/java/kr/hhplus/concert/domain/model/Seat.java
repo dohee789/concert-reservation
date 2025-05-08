@@ -1,11 +1,9 @@
 package kr.hhplus.concert.domain.model;
 
 import kr.hhplus.concert.domain.model.enums.SeatStatus;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
+@NoArgsConstructor(force = true)
 @AllArgsConstructor
 @Getter
 @RequiredArgsConstructor
@@ -21,11 +19,15 @@ public class Seat {
 
     private Long version;
 
-    public void reserve(){
+    public void reserved(){
         this.seatStatus = seatStatus.RESERVED;
     }
 
-    public void withhold(){
+    public void notAssigned(){
         this.seatStatus = seatStatus.AVAILABLE;
+    }
+
+    public void pending(){
+        this.seatStatus = seatStatus.PENDING;
     }
 }

@@ -1,14 +1,17 @@
 package kr.hhplus.concert.domain.model;
 
 import kr.hhplus.concert.domain.model.enums.WalletType;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
 
+@AllArgsConstructor
 @Getter
 @Builder
 public class Wallet {
+    private final Reservation reservation;
     private Long id;
     private Long userId;
     private Float amount;
@@ -31,9 +34,10 @@ public class Wallet {
         this.walletType = walletType.CHARGE;
     }
 
-    public void pay(Float amount) {
+    public void pay(Reservation reservation, Float amount) {
         this.balance -= amount;
         this.processedAt = LocalDateTime.now();
         this.walletType = walletType.PAYMENT;
+        reservation.getSeat().reserved();
     }
 }

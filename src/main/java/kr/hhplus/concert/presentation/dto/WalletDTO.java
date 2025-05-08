@@ -10,6 +10,7 @@ public class WalletDTO {
     @Builder
     public record PaymentRequest (
         Long userId,
+        Long reservationId,
         Float balance,
         Float amount
     ) {

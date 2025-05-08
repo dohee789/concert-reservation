@@ -1,5 +1,6 @@
 package kr.hhplus.concert.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import kr.hhplus.concert.domain.model.enums.QueueStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,6 +24,8 @@ public class Queue {
 
     private QueueStatus queueStatus;
 
+    private Long version;
+
     private static final int MAX_QUEUE_SIZE = 100;
 
     public static Queue generateToken(Long userId) {
@@ -35,6 +38,7 @@ public class Queue {
                 .build();
     }
 
+    @JsonIgnore
     public boolean isActive() {
         return this.queueStatus == QueueStatus.ACTIVE;
     }
@@ -43,6 +47,7 @@ public class Queue {
         this.queueStatus = QueueStatus.WAITING;
     }
 
+    @JsonIgnore
     public boolean isExpired() {
         return LocalDateTime.now().isAfter(this.expiredAt);
     }

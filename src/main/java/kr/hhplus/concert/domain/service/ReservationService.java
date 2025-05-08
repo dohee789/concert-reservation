@@ -1,10 +1,13 @@
 package kr.hhplus.concert.domain.service;
 
+import kr.hhplus.concert.domain.exception.SeatUnavailableException;
 import kr.hhplus.concert.domain.model.Queue;
 import kr.hhplus.concert.domain.model.Reservation;
 import kr.hhplus.concert.domain.model.Seat;
 import kr.hhplus.concert.domain.repository.ReservationRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
@@ -14,13 +17,20 @@ import java.util.NoSuchElementException;
 public class ReservationService {
     private final ReservationRepository reservationRepository;
 
+    @CachePut(value = "reservation", key = "#queue.userId + ':' + #seat.concertSchedule.id + ':' + #seat.seatNumber")
     public Reservation makeReservation(Queue queue, Seat seat) {
-        Reservation reservation = Reservation.create(queue, seat);
-        return reservationRepository.save(reservation);
+        try {
+            Reservation reservation = Reservation.create(queue, seat);
+            return reservationRepository.save(reservation);
+        } catch (IllegalStateException e){
+            seat.notAssigned();
+            throw new SeatUnavailableException(seat.getSeatStatus());
+        }
     }
 
-    public Reservation getReservation(Long userId) {
-        return reservationRepository.findById(userId)
+    @Cacheable(value = "reservation", key = "#reservationId", unless = "#result == null")
+    public Reservation getReservation(Long reservationId) {
+        return reservationRepository.findById(reservationId)
                 .orElseThrow(() -> new NoSuchElementException("예약 정보를 찾을 수 없습니다."));
     }
 }

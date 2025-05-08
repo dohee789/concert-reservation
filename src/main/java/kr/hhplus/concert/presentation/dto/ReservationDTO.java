@@ -21,7 +21,6 @@ public class ReservationDTO {
         public ReservationCommand toCommand(String token) {
             return ReservationCommand.builder()
                     .userId(this.userId)
-                    .concertId(this.concertId)
                     .concertScheduleId(this.concertScheduleId)
                     .seatId(this.seatId)
                     .build();

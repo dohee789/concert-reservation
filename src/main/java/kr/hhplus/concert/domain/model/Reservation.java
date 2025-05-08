@@ -1,13 +1,11 @@
 package kr.hhplus.concert.domain.model;
 
 import kr.hhplus.concert.domain.model.enums.SeatStatus;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
+@NoArgsConstructor(force = true)
 @AllArgsConstructor
 @Getter
 @Builder
@@ -26,7 +24,7 @@ public class Reservation {
             throw new IllegalStateException("해당 좌석은 예약할 수 없습니다.");
         }
 
-        seat.reserve();
+        seat.pending();
         queue.pending();
 
         return Reservation.builder()
