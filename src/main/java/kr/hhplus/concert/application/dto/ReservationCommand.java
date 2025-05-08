@@ -5,7 +5,6 @@ import lombok.Builder;
 @Builder
 public record ReservationCommand (
     Long userId,
-    Long concertId,
     Long concertScheduleId,
     Long seatId
 ){
