@@ -31,7 +31,7 @@ public class WalletHistoryEntity {
     public WalletHistory of() {
         return WalletHistory.builder()
                 .id(this.id)
-                .userId(this.wallet.getId())
+                .userId(this.wallet.getUser().getId())
                 .balance(this.wallet.getBalance())
                 .processedAt(this.wallet.getProcessedAt())
                 .paymentType(this.wallet.getWalletType())

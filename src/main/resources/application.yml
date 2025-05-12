@@ -16,15 +16,17 @@ spring:
     generate-ddl: false
     show-sql: false
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
     properties:
       hibernate.timezone.default_storage: NORMALIZE_UTC
       hibernate.jdbc.time_zone: UTC
 
 ---
-spring.config.activate.on-profile: local, test
-
 spring:
+  config:
+    activate:
+      on-profile: local, test
+
   datasource:
     url: jdbc:mysql://localhost:3306/hhplus?characterEncoding=UTF-8&serverTimezone=UTC
     username: application
@@ -32,7 +34,13 @@ spring:
     initialization-mode: always
     sql-script-encoding: UTF-8
 
----
+  redis:
+    host: localhost
+    port: 6379
+
+redisson:
+  address: "redis://localhost:6379"
+
 springdoc:
   swagger-ui:
     path: /api
