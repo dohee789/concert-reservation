@@ -36,6 +36,7 @@ class WalletFacadeTest {
     @Test
     void paymentConcurrencyControl_With_PessimisticLockAndDistributeLock() throws InterruptedException {
         int threadCount = 4000;
+        Long reservationId = 1L;
         ExecutorService executor = Executors.newFixedThreadPool(threadCount);
         CountDownLatch latch = new CountDownLatch(threadCount);
         AtomicInteger successCount = new AtomicInteger();
@@ -43,7 +44,7 @@ class WalletFacadeTest {
         for (int i = 1; i < threadCount+1; i++) {
             executor.execute(() -> {
                 try {
-                    walletFacade.wallet((long)1);
+                    walletFacade.wallet((long)1, reservationId);
                     successCount.incrementAndGet();
                 } catch (Exception e) {
                     System.out.println("Exception: " + e.getMessage());
