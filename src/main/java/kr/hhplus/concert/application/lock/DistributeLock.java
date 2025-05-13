@@ -9,6 +9,6 @@ import java.util.concurrent.TimeUnit;
 public @interface DistributeLock {
     String key();         // SpEL로 동적 키 만들기
     TimeUnit timeUnit() default TimeUnit.SECONDS;
-    long waitTime() default 5L;
-    long leaseTime() default 5L;
+    long waitTimeSec() default 5L;
+    long leaseTimeSec() default 5L;
 }

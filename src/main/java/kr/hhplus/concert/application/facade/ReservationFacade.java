@@ -26,7 +26,7 @@ public class ReservationFacade {
     @Autowired
     private ReservationService reservationService;
 
-    @DistributeLock(key = "'assign seat:' + #command.seatId", waitTime = 5, leaseTime = 5)
+    @DistributeLock(key = "'assign-seat:' + #command.seatId", waitTimeSec = 3, leaseTimeSec = 6)
     @Transactional
     public ReservationResult makeReservation(ReservationCommand command) {
         try {

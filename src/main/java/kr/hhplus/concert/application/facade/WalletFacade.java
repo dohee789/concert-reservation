@@ -19,7 +19,7 @@ public class WalletFacade {
     private final QueueService queueService;
     private final SeatService seatService;
 
-    @DistributeLock(key = "'pay userId:' + #userId", waitTime = 5, leaseTime = 5)
+    @DistributeLock(key = "'pay-userId:' + #userId", waitTimeSec = 3, leaseTimeSec = 6)
     @Transactional
     public Wallet wallet(Long userId, Long reservationId) {
         // 토큰 및 대기열 검증

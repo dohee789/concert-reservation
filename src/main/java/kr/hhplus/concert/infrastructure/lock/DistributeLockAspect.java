@@ -42,8 +42,8 @@ public class DistributeLockAspect {
         if (key == null || key.isEmpty()) {
             throw new IllegalArgumentException("DistributedLock 키를 생성할 수 없습니다. SpEL 표현식을 확인하세요.");
         }
-        long waitTimeSec = distributeLock.waitTime();
-        long leaseTimeSec = distributeLock.leaseTime();
+        long waitTimeSec = distributeLock.waitTimeSec();
+        long leaseTimeSec = distributeLock.leaseTimeSec();
 
         RLock lock = redissonClient.getLock(key);
         log.info("redissonClient: {}", redissonClient);
