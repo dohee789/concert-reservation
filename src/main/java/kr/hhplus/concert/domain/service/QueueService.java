@@ -14,7 +14,7 @@ public class QueueService {
     private final QueueRepository queueRepository;
     private static final Long MAX_ACTIVE_COUNT = 50L;
 
-    public Queue registerToken(Long userId) {
+    public Queue registerToken(Long userId, Long concertScheduleId) {
         Queue token;
 
         if (queueRepository.countActiveQueues() >= MAX_ACTIVE_COUNT) {
