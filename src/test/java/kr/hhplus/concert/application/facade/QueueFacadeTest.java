@@ -32,11 +32,12 @@ class QueueFacadeTest {
     void UserNotFoundExceptionOccurred_WhenInvalidUserRegisterToken() {
         // given
         Long InvalidUserId = 999L;
+        Long concertScheduleId = 1L;
         // when
         doThrow(new UserNotFoundException(InvalidUserId))
                 .when(userService).CheckExistsUser(InvalidUserId);
         // then
-        assertThatThrownBy(() -> queueFacade.registerToken(InvalidUserId))
+        assertThatThrownBy(() -> queueFacade.registerToken(InvalidUserId, concertScheduleId))
                 .isInstanceOf(UserNotFoundException.class)
                 .hasMessageContaining("존재하지 않는 유저입니다. userId = " + InvalidUserId);
     }

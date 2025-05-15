@@ -16,12 +16,12 @@ public class QueueFacade {
     private final UserService userService;
 
     @Transactional
-    public Queue registerToken(Long userId) {
+    public Queue registerToken(Long userId, Long concertScheduleId) {
         try {
-            // 유저 존재 유뮤 확인
+            // 유저 존재 유무 확인
             userService.CheckExistsUser(userId);
 
-            return queueService.registerToken(userId);
+            return queueService.registerToken(userId, concertScheduleId);
         } catch (ObjectOptimisticLockingFailureException e) {
             throw new ConcurrencyReservationException();
         }

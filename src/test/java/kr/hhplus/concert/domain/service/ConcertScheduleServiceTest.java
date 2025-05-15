@@ -37,8 +37,10 @@ class ConcertScheduleServiceTest {
         LocalDateTime inValidScheduleDate = LocalDateTime.of(2029, 4, 15, 10, 10, 10);// 존재하지 않는 날짜
         LocalDateTime ValidScheduleDate = LocalDateTime.of(2025, 4, 15, 10, 10, 10);
 
+        LocalDateTime openDate = LocalDateTime.of(2025, 4, 15, 10, 10, 10);
+
         ConcertSchedule schedule = new ConcertSchedule(
-                1L, ValidScheduleDate, Concert.builder().build()
+                1L, ValidScheduleDate, openDate, Concert.builder().build()
         );
 
         Mockito.when(concertScheduleRepository.findConcertSchedulesById(concertId)).thenReturn(List.of(schedule));

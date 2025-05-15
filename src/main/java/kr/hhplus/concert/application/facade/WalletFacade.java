@@ -18,8 +18,9 @@ public class WalletFacade {
     private final ReservationService reservationService;
     private final QueueService queueService;
     private final SeatService seatService;
+    private final ConcertRankingService concertRankingService;
 
-    @DistributeLock(key = "'pay userId:' + #userId", waitTime = 5, leaseTime = 5)
+    @DistributeLock(key = "'pay-userId:' + #userId", waitTimeSec = 3, leaseTimeSec = 6)
     @Transactional
     public Wallet wallet(Long userId, Long reservationId) {
         // 토큰 및 대기열 검증
@@ -32,6 +33,10 @@ public class WalletFacade {
         Wallet wallet = walletService.payMoney(reservation, seat.getPrice());
         // 결제 내역 저장
         walletHistoryService.save(wallet);
+        // 매진 시점 랭킹 기록
+        if (seatService.isSoldOut(reservation.getSeat().getConcertSchedule().id())) {
+            concertRankingService.tryRecordSoldOut(reservation, wallet.getProcessedAt());
+        }
         return wallet;
     }
 

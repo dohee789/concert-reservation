@@ -26,9 +26,10 @@ class QueueServiceTest {
     void GenerateToken_IfTokenCountUnder50() {
         // given
         Long userId = 1L;
+        Long concertScheduleId = 1L;
         // when
         Mockito.when(queueRepository.countActiveQueues()).thenReturn(49L);
-        Queue token = queueService.registerToken(userId);
+        Queue token = queueService.registerToken(userId, concertScheduleId);
         // then
         assertThat(token.getQueueStatus()).isEqualTo(QueueStatus.ACTIVE);
     }
@@ -38,9 +39,10 @@ class QueueServiceTest {
     void QueueStatusPending_IfTokenCountOver50() {
         // given
         Long userId = 1L;
+        Long concertScheduleId = 1L;
         // when
         Mockito.when(queueRepository.countActiveQueues()).thenReturn(50L);
-        Queue token = queueService.registerToken(userId);
+        Queue token = queueService.registerToken(userId, concertScheduleId);
         // then
         assertThat(token.getQueueStatus()).isEqualTo(QueueStatus.WAITING);
     }
