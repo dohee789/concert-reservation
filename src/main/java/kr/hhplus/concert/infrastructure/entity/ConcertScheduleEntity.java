@@ -29,11 +29,15 @@ public class ConcertScheduleEntity {
     @Column(nullable = false)
     private LocalDateTime scheduleDateTime;
 
+    @Column(nullable = false)
+    private LocalDateTime openedAt;
+
     public static ConcertScheduleEntity from(ConcertSchedule concertSchedule) {
         return ConcertScheduleEntity.builder()
                 .id(concertSchedule.id())
                 .concert(ConcertEntity.from(concertSchedule.concert()))
                 .scheduleDateTime(concertSchedule.scheduleDateTime())
+                .openedAt(concertSchedule.openedAt())
                 .build();
     }
 
@@ -42,6 +46,7 @@ public class ConcertScheduleEntity {
                 .id(this.id)
                 .concert(this.concert.of())
                 .scheduleDateTime(this.scheduleDateTime)
+                .openedAt(this.openedAt)
                 .build();
     }
 }
