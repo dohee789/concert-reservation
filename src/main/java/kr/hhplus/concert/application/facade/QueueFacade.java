@@ -16,23 +16,26 @@ public class QueueFacade {
     private final UserService userService;
 
     @Transactional
-    public Queue registerToken(Long userId) {
+    public Queue registerToken(Long userId, Long concertScheduleId) {
         try {
-            // 유저 존재 유뮤 확인
             userService.CheckExistsUser(userId);
-
-            return queueService.registerToken(userId);
+            return queueService.registerToken(userId, concertScheduleId);
         } catch (ObjectOptimisticLockingFailureException e) {
             throw new ConcurrencyReservationException();
         }
     }
 
     public Queue getValidatedQueue(Long userId) {
-        // 유저 존재 유뮤 확인
         userService.CheckExistsUser(userId);
-
-        // 유효한 Enqueue 인지 확인
         return queueService.getValidatedQueue(userId);
+    }
+
+    public void expireToken(Long userId) {
+        queueService.expireToken(userId);
+    }
+
+    public Queue findByToken(String token) {
+        return queueService.findByToken(token);
     }
 
 }

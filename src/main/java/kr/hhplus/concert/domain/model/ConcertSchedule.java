@@ -12,5 +12,6 @@ import java.time.LocalTime;
 public record ConcertSchedule(
     Long id,
     LocalDateTime scheduleDateTime,
+    LocalDateTime openedAt,
     Concert concert
 ) {}

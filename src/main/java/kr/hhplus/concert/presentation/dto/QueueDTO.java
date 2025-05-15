@@ -9,7 +9,8 @@ import java.time.LocalDateTime;
 public class QueueDTO {
     @Builder
     public record QueueRequest (
-            Long userId
+            Long userId,
+            Long concertScheduleId
     ) {
     }
 
