@@ -6,5 +6,8 @@ import java.util.Optional;
 
 public interface SeatRepository {
     Seat save(Seat seat);
+
     Optional<Seat> findById(Long concertScheduleId);
+
+    Integer countAvailableSeatsByConcertScheduleId(Long concertScheduleId);
 }

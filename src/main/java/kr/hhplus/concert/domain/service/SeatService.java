@@ -25,4 +25,9 @@ public class SeatService {
         seat.pending();
         seatRepository.save(seat);
     }
+
+    public boolean isSoldOut(Long concertScheduleId) {
+        Integer remaining = seatRepository.countAvailableSeatsByConcertScheduleId(concertScheduleId);
+        return remaining == 0;
+    }
 }

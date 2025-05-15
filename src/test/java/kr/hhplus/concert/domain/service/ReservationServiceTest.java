@@ -36,7 +36,8 @@ class ReservationServiceTest {
         // given
         Long userId = 1L;
         Long seatId = 100L;
-        ConcertSchedule concertSchedule = new ConcertSchedule(userId, LocalDateTime.now(), Concert.builder().build());
+        LocalDateTime openDate = LocalDateTime.of(2025, 4, 15, 10, 10, 10);
+        ConcertSchedule concertSchedule = new ConcertSchedule(userId, LocalDateTime.now(), openDate, Concert.builder().build());
         Seat seat = Seat.builder().seatNumber(seatId).concertSchedule(concertSchedule).seatStatus(SeatStatus.AVAILABLE).build();
         Queue queue = Queue.builder().userId(userId).queueStatus(QueueStatus.ACTIVE).build();
 
