@@ -35,7 +35,7 @@ public class QueueController {
     public ResponseEntity<QueueDTO.QueueResponse> createToken(
             @RequestBody QueueDTO.QueueRequest request
     ) {
-        Queue token = queueFacade.registerToken(request.userId());
+        Queue token = queueFacade.registerToken(request.userId(), request.concertScheduleId());
         return ResponseEntity.ok(QueueDTO.QueueResponse.of(token));
     }
 

@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS `concert_schedule` (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     concert_id BIGINT NOT NULL,
     schedule_date_time TIMESTAMP NOT NULL,
+    opened_at TIMESTAMP NOT NULL,
     FOREIGN KEY (concert_id) REFERENCES `concert`(id) ON DELETE CASCADE
 );
 
@@ -86,8 +87,8 @@ CREATE TABLE IF NOT EXISTS `wallet_history` (
 INSERT INTO concert (name, venue) VALUES ('WORLD DJ FESTIVAL', '서울랜드'),
                                          ('Ultra Music Festival', '잠실 종합운동장');
 
-INSERT INTO concert_schedule (concert_id, schedule_date_time) VALUES ((SELECT id FROM concert WHERE id = 1), '2025-05-05 20:00:00'),
-                                                                    ((SELECT id FROM concert WHERE id = 2), CURRENT_TIMESTAMP);
+INSERT INTO concert_schedule (concert_id, schedule_date_time, opened_at) VALUES ((SELECT id FROM concert WHERE id = 1), '2025-05-15 20:00:00', '2025-05-25 20:00:00'),
+                                                                                ((SELECT id FROM concert WHERE id = 2), '2025-06-15 20:00:00', '2025-06-25 20:00:00');
 
 INSERT INTO user (name) VALUES ('가'),('나'),('다'),('라'),('마');
 

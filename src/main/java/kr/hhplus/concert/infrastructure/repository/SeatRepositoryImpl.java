@@ -1,6 +1,7 @@
 package kr.hhplus.concert.infrastructure.repository;
 
 import kr.hhplus.concert.domain.model.Seat;
+import kr.hhplus.concert.domain.model.enums.SeatStatus;
 import kr.hhplus.concert.domain.repository.SeatRepository;
 import kr.hhplus.concert.infrastructure.entity.SeatEntity;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +28,11 @@ public class SeatRepositoryImpl implements SeatRepository {
     public Optional<Seat> findById(Long concertScheduleId) {
         return seatJpaRepository.findById(concertScheduleId)
                 .map(SeatEntity::of);
+    }
+
+    @Override
+    public Integer countAvailableSeatsByConcertScheduleId(Long concertScheduleId) {
+        return seatJpaRepository.countByConcertScheduleIdAndSeatStatus(concertScheduleId, SeatStatus.AVAILABLE);
     }
 
 }
