@@ -21,6 +21,7 @@ public class ReservationService {
     public Reservation makeReservation(Queue queue, Seat seat) {
         try {
             Reservation reservation = Reservation.create(queue, seat);
+            queue.expireToken();
             return reservationRepository.save(reservation);
         } catch (IllegalStateException e){
             seat.notAssigned();

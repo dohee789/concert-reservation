@@ -4,8 +4,10 @@ import kr.hhplus.concert.application.dto.ReservationCommand;
 import kr.hhplus.concert.application.dto.ReservationResult;
 import kr.hhplus.concert.application.lock.DistributeLock;
 import kr.hhplus.concert.domain.exception.ConcurrencyReservationException;
+import kr.hhplus.concert.domain.model.common.Events;
 import kr.hhplus.concert.domain.model.queue.Queue;
 import kr.hhplus.concert.domain.model.reservation.Reservation;
+import kr.hhplus.concert.domain.model.reservation.ReservationCompletedEvent;
 import kr.hhplus.concert.domain.model.seat.Seat;
 import kr.hhplus.concert.domain.service.QueueService;
 import kr.hhplus.concert.domain.service.ReservationService;
@@ -19,12 +21,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 public class ReservationFacade {
-    @Autowired
-    private QueueService queueService;
-    @Autowired
-    private SeatService seatService;
-    @Autowired
-    private ReservationService reservationService;
+    private final QueueService queueService;
+    private final SeatService seatService;
+    private final ReservationService reservationService;
+    private final Events events;
 
     @DistributeLock(key = "'assign-seat:' + #command.seatId", waitTimeSec = 3, leaseTimeSec = 6)
     @Transactional
@@ -38,6 +38,11 @@ public class ReservationFacade {
             seatService.assignSeat(seat.getConcertSchedule().id());
             // 예약 정보 저장
             Reservation reservation = reservationService.makeReservation(queue, seat);
+            // 예약 정보 전송 이벤트 발행
+            events.publish(new ReservationCompletedEvent(
+                    reservation.getSeat().getConcertSchedule().id(),
+                    reservation.getReservedAt()
+            ));
 
             return ReservationResult.from(reservation);
         } catch (ObjectOptimisticLockingFailureException e) {
