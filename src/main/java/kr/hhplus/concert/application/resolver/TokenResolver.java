@@ -1,7 +1,6 @@
 package kr.hhplus.concert.application.resolver;
 
 import kr.hhplus.concert.domain.exception.InvalidTokenFormatException;
-import kr.hhplus.concert.domain.model.Queue;
 import kr.hhplus.concert.domain.service.QueueService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

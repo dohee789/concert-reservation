@@ -1,6 +1,6 @@
-package kr.hhplus.concert.domain.model;
+package kr.hhplus.concert.domain.model.wallet;
 
-import kr.hhplus.concert.domain.model.enums.WalletType;
+import kr.hhplus.concert.domain.model.reservation.Reservation;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

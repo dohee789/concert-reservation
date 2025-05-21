@@ -1,6 +1,6 @@
 package kr.hhplus.concert.infrastructure.repository;
 
-import kr.hhplus.concert.domain.model.Queue;
+import kr.hhplus.concert.domain.model.queue.Queue;
 import kr.hhplus.concert.domain.repository.QueueRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

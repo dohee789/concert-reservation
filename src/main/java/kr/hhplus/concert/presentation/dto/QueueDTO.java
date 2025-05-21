@@ -1,7 +1,7 @@
 package kr.hhplus.concert.presentation.dto;
 
-import kr.hhplus.concert.domain.model.Queue;
-import kr.hhplus.concert.domain.model.enums.QueueStatus;
+import kr.hhplus.concert.domain.model.queue.Queue;
+import kr.hhplus.concert.domain.model.queue.QueueStatus;
 import lombok.Builder;
 
 import java.time.LocalDateTime;

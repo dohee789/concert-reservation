@@ -1,8 +1,7 @@
 package kr.hhplus.concert.infrastructure.entity;
 
 import jakarta.persistence.*;
-import kr.hhplus.concert.domain.model.Wallet;
-import kr.hhplus.concert.domain.model.WalletHistory;
+import kr.hhplus.concert.domain.model.wallet.WalletHistory;
 import lombok.*;
 
 @Entity

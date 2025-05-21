@@ -1,14 +1,12 @@
-package kr.hhplus.concert.domain.model;
+package kr.hhplus.concert.domain.model.queue;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import kr.hhplus.concert.domain.model.enums.QueueStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
 
 @AllArgsConstructor

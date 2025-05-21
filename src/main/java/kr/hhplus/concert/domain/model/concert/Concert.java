@@ -1,4 +1,4 @@
-package kr.hhplus.concert.domain.model;
+package kr.hhplus.concert.domain.model.concert;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Builder;

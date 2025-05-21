@@ -1,7 +1,6 @@
 package kr.hhplus.concert.domain.service;
 
-import kr.hhplus.concert.application.lock.DistributeLock;
-import kr.hhplus.concert.domain.model.Seat;
+import kr.hhplus.concert.domain.model.seat.Seat;
 import kr.hhplus.concert.domain.repository.SeatRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

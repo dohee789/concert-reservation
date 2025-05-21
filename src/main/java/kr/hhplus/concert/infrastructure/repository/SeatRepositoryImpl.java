@@ -1,7 +1,7 @@
 package kr.hhplus.concert.infrastructure.repository;
 
-import kr.hhplus.concert.domain.model.Seat;
-import kr.hhplus.concert.domain.model.enums.SeatStatus;
+import kr.hhplus.concert.domain.model.seat.Seat;
+import kr.hhplus.concert.domain.model.seat.SeatStatus;
 import kr.hhplus.concert.domain.repository.SeatRepository;
 import kr.hhplus.concert.infrastructure.entity.SeatEntity;
 import lombok.RequiredArgsConstructor;

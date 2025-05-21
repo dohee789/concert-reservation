@@ -1,7 +1,7 @@
 package kr.hhplus.concert.domain.service;
 
-import kr.hhplus.concert.domain.model.Wallet;
-import kr.hhplus.concert.domain.model.WalletHistory;
+import kr.hhplus.concert.domain.model.wallet.Wallet;
+import kr.hhplus.concert.domain.model.wallet.WalletHistory;
 import kr.hhplus.concert.domain.repository.WalletHistoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

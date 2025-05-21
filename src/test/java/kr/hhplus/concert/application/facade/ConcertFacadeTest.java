@@ -1,6 +1,6 @@
 package kr.hhplus.concert.application.facade;
 
-import kr.hhplus.concert.domain.model.Concert;
+import kr.hhplus.concert.domain.model.concert.Concert;
 import kr.hhplus.concert.domain.service.ConcertService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

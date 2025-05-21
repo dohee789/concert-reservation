@@ -1,6 +1,6 @@
 package kr.hhplus.concert.domain.service;
 
-import kr.hhplus.concert.domain.model.Concert;
+import kr.hhplus.concert.domain.model.concert.Concert;
 import kr.hhplus.concert.domain.repository.ConcertRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;

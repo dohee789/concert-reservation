@@ -1,7 +1,7 @@
 package kr.hhplus.concert.domain.service;
 
-import kr.hhplus.concert.domain.model.Queue;
-import kr.hhplus.concert.domain.model.enums.QueueStatus;
+import kr.hhplus.concert.domain.model.queue.Queue;
+import kr.hhplus.concert.domain.model.queue.QueueStatus;
 import kr.hhplus.concert.infrastructure.repository.QueueRepositoryImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

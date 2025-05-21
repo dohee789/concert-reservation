@@ -1,6 +1,6 @@
 package kr.hhplus.concert.domain.repository;
 
-import kr.hhplus.concert.domain.model.Reservation;
+import kr.hhplus.concert.domain.model.reservation.Reservation;
 
 import java.util.Optional;
 

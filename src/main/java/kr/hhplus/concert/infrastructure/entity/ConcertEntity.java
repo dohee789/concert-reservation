@@ -1,7 +1,7 @@
 package kr.hhplus.concert.infrastructure.entity;
 
 import jakarta.persistence.*;
-import kr.hhplus.concert.domain.model.Concert;
+import kr.hhplus.concert.domain.model.concert.Concert;
 import lombok.*;
 
 @Entity
