@@ -2,8 +2,8 @@ package kr.hhplus.concert.domain.service;
 
 
 import kr.hhplus.concert.domain.exception.InSufficientBalanceException;
-import kr.hhplus.concert.domain.model.Reservation;
-import kr.hhplus.concert.domain.model.Wallet;
+import kr.hhplus.concert.domain.model.reservation.Reservation;
+import kr.hhplus.concert.domain.model.wallet.Wallet;
 import kr.hhplus.concert.domain.repository.WalletRepository;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.DisplayName;

@@ -1,9 +1,8 @@
 package kr.hhplus.concert.application.dto;
 
-import kr.hhplus.concert.domain.model.Reservation;
+import kr.hhplus.concert.domain.model.reservation.Reservation;
 import lombok.Builder;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Builder

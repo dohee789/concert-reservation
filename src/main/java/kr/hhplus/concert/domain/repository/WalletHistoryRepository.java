@@ -1,6 +1,6 @@
 package kr.hhplus.concert.domain.repository;
 
-import kr.hhplus.concert.domain.model.WalletHistory;
+import kr.hhplus.concert.domain.model.wallet.WalletHistory;
 
 import java.util.Optional;
 

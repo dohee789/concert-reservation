@@ -1,7 +1,7 @@
 package kr.hhplus.concert.domain.service;
 
-import kr.hhplus.concert.domain.model.Concert;
-import kr.hhplus.concert.domain.model.ConcertSchedule;
+import kr.hhplus.concert.domain.model.concert.Concert;
+import kr.hhplus.concert.domain.model.concert.ConcertSchedule;
 import kr.hhplus.concert.domain.repository.ConcertScheduleRepository;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
@@ -12,9 +12,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
 import java.util.NoSuchElementException;
 

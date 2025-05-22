@@ -1,6 +1,6 @@
 package kr.hhplus.concert.infrastructure.repository;
 
-import kr.hhplus.concert.domain.model.ConcertSchedule;
+import kr.hhplus.concert.domain.model.concert.ConcertSchedule;
 import kr.hhplus.concert.domain.repository.ConcertScheduleRepository;
 import kr.hhplus.concert.infrastructure.entity.ConcertScheduleEntity;
 import lombok.RequiredArgsConstructor;

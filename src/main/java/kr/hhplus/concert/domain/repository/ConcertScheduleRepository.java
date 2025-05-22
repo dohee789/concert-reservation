@@ -1,6 +1,6 @@
 package kr.hhplus.concert.domain.repository;
 
-import kr.hhplus.concert.domain.model.ConcertSchedule;
+import kr.hhplus.concert.domain.model.concert.ConcertSchedule;
 
 import java.util.List;
 

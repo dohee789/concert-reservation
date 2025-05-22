@@ -1,8 +1,8 @@
 package kr.hhplus.concert.infrastructure.entity;
 
 import jakarta.persistence.*;
-import kr.hhplus.concert.domain.model.Seat;
-import kr.hhplus.concert.domain.model.enums.SeatStatus;
+import kr.hhplus.concert.domain.model.seat.Seat;
+import kr.hhplus.concert.domain.model.seat.SeatStatus;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
