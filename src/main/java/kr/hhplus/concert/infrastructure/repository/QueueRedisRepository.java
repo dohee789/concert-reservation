@@ -1,7 +1,7 @@
 package kr.hhplus.concert.infrastructure.repository;
 
-import kr.hhplus.concert.domain.model.Queue;
-import kr.hhplus.concert.domain.model.enums.QueueStatus;
+import kr.hhplus.concert.domain.model.queue.Queue;
+import kr.hhplus.concert.domain.model.queue.QueueStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;

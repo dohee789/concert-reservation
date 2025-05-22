@@ -1,6 +1,6 @@
 package kr.hhplus.concert.presentation.dto;
 
-import kr.hhplus.concert.domain.model.Wallet;
+import kr.hhplus.concert.domain.model.wallet.Wallet;
 import lombok.Builder;
 
 import java.time.LocalDateTime;

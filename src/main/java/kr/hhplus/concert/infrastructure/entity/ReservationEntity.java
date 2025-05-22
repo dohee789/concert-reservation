@@ -1,8 +1,8 @@
 package kr.hhplus.concert.infrastructure.entity;
 
 import jakarta.persistence.*;
-import kr.hhplus.concert.domain.model.Queue;
-import kr.hhplus.concert.domain.model.Reservation;
+import kr.hhplus.concert.domain.model.queue.Queue;
+import kr.hhplus.concert.domain.model.reservation.Reservation;
 import lombok.*;
 
 import java.time.LocalDateTime;

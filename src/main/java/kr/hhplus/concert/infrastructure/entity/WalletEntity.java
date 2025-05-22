@@ -1,8 +1,8 @@
 package kr.hhplus.concert.infrastructure.entity;
 
 import jakarta.persistence.*;
-import kr.hhplus.concert.domain.model.Wallet;
-import kr.hhplus.concert.domain.model.enums.WalletType;
+import kr.hhplus.concert.domain.model.wallet.Wallet;
+import kr.hhplus.concert.domain.model.wallet.WalletType;
 import lombok.*;
 
 import java.time.LocalDateTime;

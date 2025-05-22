@@ -1,7 +1,7 @@
 package kr.hhplus.concert.application.facade;
 
 import kr.hhplus.concert.domain.exception.ConcurrencyReservationException;
-import kr.hhplus.concert.domain.model.Queue;
+import kr.hhplus.concert.domain.model.queue.Queue;
 import kr.hhplus.concert.domain.service.QueueService;
 import kr.hhplus.concert.domain.service.UserService;
 import lombok.RequiredArgsConstructor;

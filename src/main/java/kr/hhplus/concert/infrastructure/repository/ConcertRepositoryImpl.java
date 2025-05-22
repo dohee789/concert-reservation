@@ -1,9 +1,8 @@
 package kr.hhplus.concert.infrastructure.repository;
 
-import kr.hhplus.concert.domain.model.Concert;
+import kr.hhplus.concert.domain.model.concert.Concert;
 import kr.hhplus.concert.domain.repository.ConcertRepository;
 import kr.hhplus.concert.infrastructure.entity.ConcertEntity;
-import kr.hhplus.concert.infrastructure.entity.QueueEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;

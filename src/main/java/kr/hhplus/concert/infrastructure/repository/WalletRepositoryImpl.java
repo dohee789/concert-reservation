@@ -1,6 +1,6 @@
 package kr.hhplus.concert.infrastructure.repository;
 
-import kr.hhplus.concert.domain.model.Wallet;
+import kr.hhplus.concert.domain.model.wallet.Wallet;
 import kr.hhplus.concert.domain.repository.WalletRepository;
 import kr.hhplus.concert.infrastructure.entity.WalletEntity;
 import lombok.RequiredArgsConstructor;

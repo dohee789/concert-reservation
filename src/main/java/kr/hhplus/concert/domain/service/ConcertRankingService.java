@@ -1,6 +1,6 @@
 package kr.hhplus.concert.domain.service;
 
-import kr.hhplus.concert.domain.model.Reservation;
+import kr.hhplus.concert.domain.model.reservation.Reservation;
 import kr.hhplus.concert.domain.repository.ConcertRankingRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

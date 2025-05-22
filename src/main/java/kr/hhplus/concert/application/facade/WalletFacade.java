@@ -1,9 +1,9 @@
 package kr.hhplus.concert.application.facade;
 
 import kr.hhplus.concert.application.lock.DistributeLock;
-import kr.hhplus.concert.domain.model.Wallet;
-import kr.hhplus.concert.domain.model.Reservation;
-import kr.hhplus.concert.domain.model.Seat;
+import kr.hhplus.concert.domain.model.wallet.Wallet;
+import kr.hhplus.concert.domain.model.reservation.Reservation;
+import kr.hhplus.concert.domain.model.seat.Seat;
 import kr.hhplus.concert.domain.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

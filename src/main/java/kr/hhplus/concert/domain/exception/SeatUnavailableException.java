@@ -1,6 +1,6 @@
 package kr.hhplus.concert.domain.exception;
 
-import kr.hhplus.concert.domain.model.enums.SeatStatus;
+import kr.hhplus.concert.domain.model.seat.SeatStatus;
 
 public class SeatUnavailableException extends RuntimeException {
     public SeatUnavailableException(SeatStatus seatStatus){
