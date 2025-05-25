@@ -1,4 +1,4 @@
-package kr.hhplus.concert.domain.model.enums;
+package kr.hhplus.concert.domain.model.seat;
 
 public enum SeatStatus {
     AVAILABLE,

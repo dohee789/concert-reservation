@@ -1,10 +1,9 @@
 package kr.hhplus.concert.domain.repository;
 
-import kr.hhplus.concert.domain.model.Queue;
+import kr.hhplus.concert.domain.model.queue.Queue;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 public interface QueueRepository {
     Optional<Queue> findByUserId(Long userId);

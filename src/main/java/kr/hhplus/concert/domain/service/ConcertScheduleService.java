@@ -1,6 +1,6 @@
 package kr.hhplus.concert.domain.service;
 
-import kr.hhplus.concert.domain.model.ConcertSchedule;
+import kr.hhplus.concert.domain.model.concert.ConcertSchedule;
 import kr.hhplus.concert.domain.repository.ConcertScheduleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;

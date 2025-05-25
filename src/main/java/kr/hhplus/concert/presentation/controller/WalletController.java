@@ -7,7 +7,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import kr.hhplus.concert.application.facade.WalletFacade;
-import kr.hhplus.concert.domain.model.Wallet;
+import kr.hhplus.concert.domain.model.wallet.Wallet;
 import kr.hhplus.concert.presentation.dto.WalletDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

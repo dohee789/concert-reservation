@@ -1,13 +1,11 @@
 package kr.hhplus.concert.domain.service;
 
-import kr.hhplus.concert.domain.model.Queue;
+import kr.hhplus.concert.domain.model.queue.Queue;
 import kr.hhplus.concert.domain.repository.QueueRepository;
-import kr.hhplus.concert.infrastructure.repository.QueueRedisRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor

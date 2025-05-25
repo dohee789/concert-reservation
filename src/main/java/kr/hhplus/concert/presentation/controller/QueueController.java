@@ -6,13 +6,11 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import kr.hhplus.concert.application.facade.QueueFacade;
-import kr.hhplus.concert.domain.model.Queue;
+import kr.hhplus.concert.domain.model.queue.Queue;
 import kr.hhplus.concert.presentation.dto.QueueDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/api/v1/token")

@@ -1,6 +1,6 @@
-package kr.hhplus.concert.domain.model;
+package kr.hhplus.concert.domain.model.seat;
 
-import kr.hhplus.concert.domain.model.enums.SeatStatus;
+import kr.hhplus.concert.domain.model.concert.ConcertSchedule;
 import lombok.*;
 
 @NoArgsConstructor(force = true)

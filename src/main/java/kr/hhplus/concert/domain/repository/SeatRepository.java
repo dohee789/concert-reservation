@@ -1,6 +1,6 @@
 package kr.hhplus.concert.domain.repository;
 
-import kr.hhplus.concert.domain.model.Seat;
+import kr.hhplus.concert.domain.model.seat.Seat;
 
 import java.util.Optional;
 

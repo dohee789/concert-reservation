@@ -1,8 +1,8 @@
 package kr.hhplus.concert.domain.service;
 
 import kr.hhplus.concert.TestcontainersConfiguration;
-import kr.hhplus.concert.domain.model.Concert;
-import kr.hhplus.concert.domain.model.ConcertSchedule;
+import kr.hhplus.concert.domain.model.concert.Concert;
+import kr.hhplus.concert.domain.model.concert.ConcertSchedule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

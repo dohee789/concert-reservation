@@ -1,9 +1,7 @@
 package kr.hhplus.concert.application.facade;
 
-import kr.hhplus.concert.domain.model.Wallet;
+import kr.hhplus.concert.domain.model.wallet.Wallet;
 import kr.hhplus.concert.domain.repository.WalletRepository;
-import kr.hhplus.concert.infrastructure.entity.WalletEntity;
-import kr.hhplus.concert.infrastructure.repository.WalletJpaRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,7 +10,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-import java.util.Optional;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

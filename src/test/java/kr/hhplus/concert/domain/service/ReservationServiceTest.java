@@ -1,8 +1,12 @@
 package kr.hhplus.concert.domain.service;
 
-import kr.hhplus.concert.domain.model.*;
-import kr.hhplus.concert.domain.model.enums.QueueStatus;
-import kr.hhplus.concert.domain.model.enums.SeatStatus;
+import kr.hhplus.concert.domain.model.concert.Concert;
+import kr.hhplus.concert.domain.model.concert.ConcertSchedule;
+import kr.hhplus.concert.domain.model.queue.QueueStatus;
+import kr.hhplus.concert.domain.model.queue.Queue;
+import kr.hhplus.concert.domain.model.seat.SeatStatus;
+import kr.hhplus.concert.domain.model.reservation.Reservation;
+import kr.hhplus.concert.domain.model.seat.Seat;
 import kr.hhplus.concert.domain.repository.ReservationRepository;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,7 +17,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.junit.jupiter.api.Test;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 import java.util.Optional;

@@ -1,6 +1,8 @@
-package kr.hhplus.concert.domain.model;
+package kr.hhplus.concert.domain.model.reservation;
 
-import kr.hhplus.concert.domain.model.enums.SeatStatus;
+import kr.hhplus.concert.domain.model.queue.Queue;
+import kr.hhplus.concert.domain.model.seat.Seat;
+import kr.hhplus.concert.domain.model.seat.SeatStatus;
 import lombok.*;
 
 import java.time.LocalDateTime;

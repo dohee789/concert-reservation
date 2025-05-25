@@ -2,10 +2,8 @@ package kr.hhplus.concert.presentation.dto;
 
 import kr.hhplus.concert.application.dto.ReservationCommand;
 import kr.hhplus.concert.application.dto.ReservationResult;
-import kr.hhplus.concert.domain.model.Reservation;
 import lombok.Builder;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 
