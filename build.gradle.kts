@@ -50,11 +50,17 @@ dependencies {
 	implementation ("org.redisson:redisson-spring-boot-starter:3.28.0")
 	implementation ("org.springframework.boot:spring-boot-starter-aop")
 
+	// Kafka
+	implementation ("org.springframework.kafka:spring-kafka")
+	implementation ("com.fasterxml.jackson.core:jackson-databind")
+
     // Test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.boot:spring-boot-testcontainers")
 	testImplementation("org.testcontainers:junit-jupiter")
 	testImplementation("org.testcontainers:mysql")
+	testImplementation ("org.springframework.kafka:spring-kafka-test")
+	testImplementation("org.testcontainers:kafka:1.21.0")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
