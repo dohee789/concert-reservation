@@ -13,7 +13,7 @@ import kr.hhplus.concert.domain.service.QueueService;
 import kr.hhplus.concert.domain.service.ReservationService;
 import kr.hhplus.concert.domain.service.SeatService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +24,7 @@ public class ReservationFacade {
     private final QueueService queueService;
     private final SeatService seatService;
     private final ReservationService reservationService;
-    private final Events events;
+    private final ApplicationEventPublisher eventPublisher;
 
     @DistributeLock(key = "'assign-seat:' + #command.seatId", waitTimeSec = 3, leaseTimeSec = 6)
     @Transactional
@@ -38,8 +38,9 @@ public class ReservationFacade {
             seatService.assignSeat(seat.getConcertSchedule().id());
             // 예약 정보 저장
             Reservation reservation = reservationService.makeReservation(queue, seat);
-            // 예약 정보 전송 이벤트 발행
-            events.publish(new ReservationCompletedEvent(
+
+            // 예약 완료 이벤트 발행 (트랜잭션 커밋 후 Kafka로 전송됨)
+            eventPublisher.publishEvent(new ReservationCompletedEvent(
                     reservation.getSeat().getConcertSchedule().id(),
                     reservation.getReservedAt()
             ));
