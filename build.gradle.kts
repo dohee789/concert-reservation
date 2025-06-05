@@ -42,8 +42,9 @@ dependencies {
     // DB
 	runtimeOnly("com.mysql:mysql-connector-j")
 
-	// Swagger
+	// Swagger & Security
 	implementation ("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
+	implementation ("org.springframework.boot:spring-boot-starter-security")
 
 	// Redis
 	implementation ("org.springframework.boot:spring-boot-starter-data-redis")
@@ -53,6 +54,10 @@ dependencies {
 	// Kafka
 	implementation ("org.springframework.kafka:spring-kafka")
 	implementation ("com.fasterxml.jackson.core:jackson-databind")
+
+	// Monitoring - Micrometer & Prometheus
+	implementation("io.micrometer:micrometer-registry-prometheus")
+	implementation("io.micrometer:micrometer-core")
 
     // Test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
